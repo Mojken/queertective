@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7xyrodcub2p7"]
+
+[ext_resource type="Script" path="res://PlayerController.gd" id="1_8hhq7"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lnisg"]
+size = Vector2(3000, 10)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dm2e1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_85qr3"]
+radius = 25.0
+height = 100.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n3mqr"]
+size = Vector2(50, 100)
+
+[sub_resource type="Gradient" id="Gradient_cvr35"]
+offsets = PackedFloat32Array(0, 0.359281, 0.742515, 0.928144, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.494881, 0.494881, 0.494881, 1, 0.730539, 0.730539, 0.730539, 1, 0.869119, 0.869119, 0.869119, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pepf6"]
+noise_type = 3
+frequency = 0.036
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w58pi"]
+width = 250
+height = 175
+color_ramp = SubResource("Gradient_cvr35")
+noise = SubResource("FastNoiseLite_pepf6")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 500)
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+texture = SubResource("PlaceholderTexture2D_lnisg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_dm2e1")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(576, 445)
+script = ExtResource("1_8hhq7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_85qr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = SubResource("PlaceholderTexture2D_n3mqr")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -204)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 1)
+motion_offset = Vector2(100, 0)
+
+[node name="Blob2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(363.5, 326.5)
+texture = SubResource("NoiseTexture2D_w58pi")
+centered = false
+
+[node name="Blob4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(-63.2499, 326.5)
+texture = SubResource("NoiseTexture2D_w58pi")
+centered = false
+
+[node name="Blob3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(763.75, 326.5)
+texture = SubResource("NoiseTexture2D_w58pi")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Blob" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(362, 325)
+texture = SubResource("NoiseTexture2D_w58pi")
+centered = false
+
+[node name="Blob2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-63, 325)
+texture = SubResource("NoiseTexture2D_w58pi")
+centered = false
+
+[node name="Blob3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(763, 325)
+texture = SubResource("NoiseTexture2D_w58pi")
+centered = false
