@@ -1,6 +1,6 @@
-extends CharacterBody2D
+extends CharacterBody3D
 
-@export var speed : float = 200.0
+@export var speed : float = 2.0
 
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 
@@ -11,27 +11,58 @@ var animation_locked : bool = false
 var direction : Vector2 = Vector2.ZERO
 var was_in_air : bool = false
 
+var layer_target = null
+var layer_start = null
+var layer_acc = 0
+
 func _physics_process(delta):
+    if layer_target != null:
+        if layer_start == null:
+            layer_start = position.z
+        layer_acc += delta * 3
+        var smaller = min(abs(layer_start), abs(layer_target))
+        var step = smoothstep(
+            smaller,
+            max(abs(layer_start), abs(layer_target)),
+            smaller + layer_acc
+        )
+        position.z = lerp(layer_start, layer_target, step)
+
+        direction = Vector2.ZERO
+        velocity = Vector3.ZERO
+        if step >= 1.0:
+            layer_target = null
+            layer_start = null
+            layer_acc = 0
+    else:
+        direction = Input.get_vector("left", "right", "up", "down")
+
+    if direction.length_squared() > 0:
+        velocity = lerp(velocity, Vector3(direction.x, 0, direction.y) * speed, delta * 10)
+    else:
+        velocity *= 0.5
+
     # Add the gravity.
     if not is_on_floor():
-        velocity.y += gravity * delta
+        velocity.y -= gravity * delta
         was_in_air = true
     else:
         was_in_air = false
 
-    # Get the input direction and handle the movement/deceleration.
-    # As good practice, you should replace UI actions with custom gameplay actions.
-    direction = Input.get_vector("left", "right", "up", "down")
-
-    if direction.x != 0:# && animated_sprite.animation != "jump_end":
-        velocity.x = direction.x * speed
-    else:
-        velocity.x = move_toward(velocity.x, 0, speed)
-
     move_and_slide()
+    var corridor_width = 1.2
+    var corridor_spacing = 5
+    var mod_pos = fmod(position.z, corridor_spacing)
+    if mod_pos < 0:
+        mod_pos += 5
+    if mod_pos >= corridor_width:
+        print(velocity.z)
+        if velocity.z > 0:
+            layer_target = position.z + corridor_spacing - mod_pos + 0.05
+        elif velocity.z < 0:
+            layer_target = position.z - mod_pos + corridor_width - 0.05
     #update_animation()
     #update_facing_direction()
-    print(position)
 
 func update_animation():
     if not animation_locked:

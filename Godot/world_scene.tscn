@@ -1,91 +1,217 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7xyrodcub2p7"]
+[gd_scene load_steps=16 format=3 uid="uid://b7xyrodcub2p7"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_8hhq7"]
+[ext_resource type="Texture2D" uid="uid://5dlji68d7tau" path="res://icon.svg" id="2_3ce3c"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lnisg"]
-size = Vector2(3000, 10)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_neuk5"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dm2e1"]
+[sub_resource type="Sky" id="Sky_vb6x1"]
+sky_material = SubResource("ProceduralSkyMaterial_neuk5")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_85qr3"]
-radius = 25.0
-height = 100.0
+[sub_resource type="Environment" id="Environment_uo8p0"]
+background_mode = 2
+sky = SubResource("Sky_vb6x1")
+ambient_light_source = 3
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_np8lb"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_25gig"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ador2"]
+size = Vector3(0.564892, 1.15004, 0.0828802)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n3mqr"]
-size = Vector2(50, 100)
+size = Vector2(1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yl6d5"]
+size = Vector3(17.5, 1.687, 3.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8bya"]
+size = Vector3(2.5, 1.687, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqi18"]
+size = Vector3(2.5, 1.687, 3.8)
 
 [sub_resource type="Gradient" id="Gradient_cvr35"]
 offsets = PackedFloat32Array(0, 0.359281, 0.742515, 0.928144, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.494881, 0.494881, 0.494881, 1, 0.730539, 0.730539, 0.730539, 1, 0.869119, 0.869119, 0.869119, 1, 1, 1, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pepf6"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fm5k6"]
 noise_type = 3
+seed = 7
 frequency = 0.036
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w58pi"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tr0ya"]
 width = 250
 height = 175
 color_ramp = SubResource("Gradient_cvr35")
-noise = SubResource("FastNoiseLite_pepf6")
+noise = SubResource("FastNoiseLite_fm5k6")
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node3D"]
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(0, 500)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uo8p0")
+camera_attributes = SubResource("CameraAttributesPractical_np8lb")
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor"]
-texture = SubResource("PlaceholderTexture2D_lnisg")
+[node name="Floor" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-shape = SubResource("WorldBoundaryShape2D_dm2e1")
+[node name="CollisionShape2D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_25gig")
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(576, 445)
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492541, 0.701067)
 script = ExtResource("1_8hhq7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CapsuleShape2D_85qr3")
+[node name="CollisionShape2D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0824807, 0)
+shape = SubResource("BoxShape3D_ador2")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Sprite2D" type="Sprite3D" parent="Player"]
+sorting_offset = 0.1
+pixel_size = 0.5
 texture = SubResource("PlaceholderTexture2D_n3mqr")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -204)
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.765866, 1.64634)
+fov = 84.3628
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="Face" type="Sprite3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394421, 0)
+sorting_offset = 0.2
+pixel_size = 0.004
+texture = ExtResource("2_3ce3c")
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.8, 1)
-motion_offset = Vector2(100, 0)
+[node name="FrontBound" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
-[node name="Blob2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(363.5, 326.5)
-texture = SubResource("NoiseTexture2D_w58pi")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrontBound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_yl6d5")
+
+[node name="BackBound" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BackBound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_yl6d5")
+
+[node name="RightBound" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightBound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_j8bya")
+
+[node name="LeftBound" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftBound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_j8bya")
+
+[node name="Building" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.027035)
 centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
 
-[node name="Blob4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(-63.2499, 326.5)
-texture = SubResource("NoiseTexture2D_w58pi")
+[node name="Building2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.027035)
 centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
 
-[node name="Blob3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(763.75, 326.5)
-texture = SubResource("NoiseTexture2D_w58pi")
+[node name="Building3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.027035)
 centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Building4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
-[node name="Blob" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(362, 325)
-texture = SubResource("NoiseTexture2D_w58pi")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0270348)
 centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
 
-[node name="Blob2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(-63, 325)
-texture = SubResource("NoiseTexture2D_w58pi")
-centered = false
+[node name="Building5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
 
-[node name="Blob3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(763, 325)
-texture = SubResource("NoiseTexture2D_w58pi")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0270348)
 centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
+
+[node name="Building6" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0270348)
+centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
+
+[node name="Building7" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0270348)
+centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
+
+[node name="Building8" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0270348)
+centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
+
+[node name="Building9" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Building9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+shape = SubResource("BoxShape3D_tqi18")
+
+[node name="Sprite" type="Sprite3D" parent="Building9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0270348)
+centered = false
+texture = SubResource("NoiseTexture2D_tr0ya")
