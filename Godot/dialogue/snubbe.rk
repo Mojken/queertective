@@ -1,0 +1,96 @@
+character snubbe "Snubbe"
+snubbe.talked = 0
+
+character me "Me"
+me.appointments = 0
+me.ghost_hint = 0
+
+jump first_chat if snubbe.talked == 0
+jump not_now if snubbe.talked == 1
+
+first_chat:
+    snubbe.talked = 1
+    me "Hey friend, you're not looking too hot. What's bothering you?"
+    snubbe "Oh."
+    snubbe "Well, I've just been feeling pretty lonely lately, you know?"
+
+    menu feeling_lonely:
+         "I feel you there, pal" > relate
+         "Well, you're in luck then, because I'm something of an expert in matters of the heart!" > pitch
+
+relate:
+    me "I feel you there, pal. Life's hard sometimes! But hey, look around, there's plenty of people out here!"
+    snubbe "Ooh. Yeah, you're right. It's just..."
+    snubbe "Well, my partner recently passed away again."
+    menu passed_away:
+         "Sorry, "again"?" > again
+         "I'm really sorry to hear that" > condolences
+
+again:
+    me "Sorry, "again"?"
+    snubbe "Ah, yeah... I don't like to mention it too much, but xe were a ghost."
+    jump ghost_revelation_1 if me.ghost_hint == 0
+    jump ghost_support_1 if me.ghost_hint == 1
+
+ghost_revelation_1:
+    me.ghost_hint = 1
+    me "Wow. I didn't know living people could date ghosts, tell me more?"
+    snubbe "Nah pal, I don't want to talk about it."
+    "That didn't go great. I should probably leave them alone for a bit."
+    jump end
+
+ghost_support_1:
+    me "I've heard of that happening before, at least you're not alone about that. I'm so sorry for your loss."
+    jump appointment
+
+appointment:
+    snubbe "Thanks pal. Means a lot."
+    snubbe "So many are judgemental about that stuff, you know? You're actually the first person I've told about xem passing, it..."
+    snubbe "It feels really nice just to have talked about it. Xe hid me from xir friends even, said it's seen as taboo to date the living or something."
+    snubbe "But you know, I don't see what's so wrong about it. You said you've met others like me?"
+    me "I have! I'm sure it's much more common than you think. Hey, why don't you drop by my office some time and tell me about your experience? I'm something of an expert when it comes to stuff like this."
+    snubbe "That sounds nice. I'll drop by tomorrow."
+    me "Take care, friend."
+    me.appointments += 1
+    "Well, I might not have learned anything new, but maybe I'll be able to during their appointment."
+    jump end
+
+condolences:
+    me "I'm really sorry to hear that."
+    jump ghost_revelation_2 if me.ghost_hint == 0
+    jump ghost_support_1 if me.ghost_hint == 1
+
+ghost_revelation_2:
+    me "It's really messed up that you had to go through that, let alone more than once."
+    snubbe "Oh."
+    snubbe "Sorry, I didn't mean..."
+    snubbe "I don't like to talk about it too much, but xe were a ghost."
+    me.ghost_hint = 1
+    me "A ghost?"
+    snubbe "Yeah."
+    snubbe "I dated a ghost, okay?"
+    me "That's cool. I didn't know that was a thing."
+    snubbe "I'm not so sure it's "a thing", ok?"
+    me "Oh, sorry, I didn't mean-"
+    snubbe "No, it's ok. Just... I'm just not in a great mood right now, you feel?"
+    me "Ah, yeah, for sure. I'm sorry for bothering you."
+    "Well, that could maybe have gone better, but I did learn something. Let's come back and ask them some more questions later."
+    jump end
+
+ghost_support_2:
+    me "Was this person a ghost by any chance?"
+    snubbe "..."
+    snubbe "How'd you guess that?"
+    me "I've heard of that kind of thing before, though it's the first time I've heard of one dying again. I wouldn't have expected that to be possible."
+    snubbe "Yeah, me either pal. I thought we were forever, you know?"
+    me "I get that."
+    jump appointment
+
+not_now:
+    me "Hey friend."
+    snubbe "Oh, hi again. Now's not really a great time, sorry."
+    me "Oh, yeah no totally. Take care."
+    "Sounds like they want to be left alone right now."
+    jump end
+
+end:

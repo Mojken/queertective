@@ -2,6 +2,9 @@ extends CharacterBody3D
 
 @export var speed : float = 2.0
 
+@export var interact_prompt : Button
+var interact_target = null
+
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -14,6 +17,11 @@ var was_in_air : bool = false
 var layer_target = null
 var layer_start = null
 var layer_acc = 0
+
+func _process(_delta):
+    if interact_target != null and Input.is_action_pressed("interact"):
+        if interact_target is Chatable:
+            (interact_target as Chatable).chat()
 
 func _physics_process(delta):
     if layer_target != null:
@@ -44,12 +52,13 @@ func _physics_process(delta):
 
     # Add the gravity.
     if not is_on_floor():
-        velocity.y -= gravity * delta
+        velocity.y -= gravity * delta/5
         was_in_air = true
     else:
         was_in_air = false
 
     move_and_slide()
+
     var corridor_width = 1.2
     var corridor_spacing = 5
     var mod_pos = fmod(position.z, corridor_spacing)
@@ -58,9 +67,9 @@ func _physics_process(delta):
     if mod_pos >= corridor_width:
         print(velocity.z)
         if velocity.z > 0:
-            layer_target = position.z + corridor_spacing - mod_pos + 0.05
+            layer_target = position.z + corridor_spacing - mod_pos + 0.1
         elif velocity.z < 0:
-            layer_target = position.z - mod_pos + corridor_width - 0.05
+            layer_target = position.z - mod_pos + corridor_width - 0.1
     #update_animation()
     #update_facing_direction()
 
@@ -80,3 +89,14 @@ func update_facing_direction():
 func _on_animated_sprite_2d_animation_finished():
     if(["jump_end", "jump_start", "jump_double"].has(animated_sprite.animation)):
         animation_locked = false
+
+
+func _on_area_3d_body_entered(body):
+    if body is CharacterBody3D:
+        interact_prompt.disabled = false
+        interact_target = body as CharacterBody3D
+
+func _on_area_3d_body_exited(body):
+    if body is CharacterBody3D:
+        interact_prompt.disabled = true
+        interact_target = null
