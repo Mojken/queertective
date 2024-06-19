@@ -21,25 +21,3 @@ Queer joy verkar handla om just att få vara queer och glad samtidigt, tillsamma
 ** man befinner sig i en svartvit värld och att man kan sprida färger i olika prideflaggspaletter
 *** Att man har en aura runt sig där man kan se queerhet eller liknande
 ** Någonting likt Speeddating for Ghosts
-* GDD - Queer McLock - happiness queertective extrordinaire
-** Core gameplay loop
-*** Gå runt
-Spelaren kan fritt röra sig till höger och vänster igenom världen
-Möjligtvis fram mot och bort ifrån kameran i olika lager, alternativt upp och ner via trappor, hissar, stegar, och dylikt.
-Spelaren kan interagera med objekt och personer runt omkring sig genom att gå fram till dem och trycka på en knapp. En prompt visas upp när det finns någonting att interagera med.
-*** Samla information
-Folk står lite var som, ute på gatan, i sina kontor
-Spelaren kan gå fram till folk och slå upp en dialog. Där kan spelaren ställa frågor och föra konversation.
-När man pratar med folk kan man få ledtrådar om olika identiteter, oftast via svaren på frågor. När man får en ledtråd förmedlas det tydligt för spelaren.
-När man samlat på sig tillräckligt med information om en identitet "låser man upp" den, vilket då låter spelaren föreslå den identiteten.
-
-Spelaren kan när som helst öppna upp en meny med information om vilka identiteter hen har låst up, samt alla hittils insamlade ledtrådar.
-*** Föreslå identiteter
-När man har en gissning om en rimlig identitet för någon kan man gå till dem och föreslå den.
-Personen säger bu eller bä, har man rätt så blir världen runt om kring ljusare/färggladare/blommigare, och man får en till pusselbit för någon ny identitet.
-** Identiteter
-*** Saphirian
-Mer öppna för relationer på ett spirituellt plan än fysiskt
-Ofta konstnärer eller drömmare
-** Huvudkaraktären
-Går klädd i pride-rock och en hatt, ser ut som en klassisk noir-detektiv. Röken från hens pipa skiftar i regnbågens färger.

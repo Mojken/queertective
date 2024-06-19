@@ -1,0 +1,25 @@
+#+title: GDD
+
+* Queer McLock - happiness queertective extrordinaire
+** Core gameplay loop
+*** Wander
+The player can freely move left and right through the world, as well as away from and towards the camera in a limited space, and up or down if the geology permits it (stairs, elevators, etc.)
+At specific junctions, the player can also move towards or away from the camera in layers. For example, they may travel down a side street to the next street over, where again they can move as described above. A prompt is displayed when this is possible.
+The player can interact with objects and people around them by walking up to them and pressing the interact button. A prompt is displayed when something can be interacted with.
+*** Collect clues
+People can be found all over the world: out in the streets, in their offices or homes, etc.
+The player can walk up to a person and strike up a conversation. This brings up a dialogue screen where the player can ask questions and make conversation.
+When talking to people, the player may find clues regarding various fantasy-queer identities, most often as answers to questions. Finding a clue is clearly communicated to the player.
+Upon collecting sufficient clues about an identity it is "unlocked", which lets the player /suggest/ that identity.
+
+The player can at any time open a menu displaying information about what abilities they have unlocked and what clues they've found.
+*** Propose identities
+When the player has a guess for a reasonable identity for some character, they can talk to them and /suggest/ it.
+The person will say yay or nay, if the player guessed correctly the world around the character becomes brighter/more vibrant/more floral, and the player likely receives a clue for some other identity.
+** Identities
+*** Saphirian
+To be more open for relations on a spiritual level than a physical one
+Usually artists or dreamers
+** The player character
+A classic film noir detective, but with a queer colourful coat instead of the usual black or tan leather.
+They smoke a pipe that emits smoke that shifts through the colours of a rainbow
