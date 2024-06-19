@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://v7pt3ujxhwto"]
+
+[ext_resource type="Script" path="res://src/ChoiceBox.gd" id="1_ku76v"]
+
+[node name="ChoiceBox" type="VBoxContainer"]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+script = ExtResource("1_ku76v")
+
+[node name="Choice" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 3

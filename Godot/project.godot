@@ -29,6 +29,7 @@ Rakugo="*res://addons/Rakugo/Rakugo.gd"
 
 [editor]
 
+script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 movie_writer/movie_file="/home/mojken/Workspace/PMGJ/recording.avi"
 movie_writer/fps=24
 

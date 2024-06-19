@@ -4,7 +4,13 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_up5lg"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jn1kn"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_db0oq"]
+content_margin_left = 15.0
+color = Color(1, 1, 1, 1)
+grow_begin = -10.0
+grow_end = -5.0
+thickness = 3
+vertical = true
 
 [node name="LineBox" type="TextEdit"]
 custom_minimum_size = Vector2(0, 40)
@@ -14,7 +20,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxEmpty_up5lg")
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_jn1kn")
+theme_override_styles/read_only = SubResource("StyleBoxLine_db0oq")
 editable = false
 selecting_enabled = false
 wrap_mode = 1
