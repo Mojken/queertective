@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bldgebg50u32j"]
+
+[ext_resource type="Script" path="res://music_and_sound/SFXHandler.gd" id="1_hdeit"]
+
+[node name="SFXHandler" type="Node2D"]
+script = ExtResource("1_hdeit")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 10
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+max_polyphony = 10
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+max_polyphony = 10
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="."]
+max_polyphony = 10
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="."]
+max_polyphony = 10
