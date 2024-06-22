@@ -18,12 +18,18 @@ var layer_target = null
 var layer_start = null
 var layer_acc = 0
 
+func _ready():
+    Rakugo.parse_and_execute_script("res://dialogue/init.rk")
+
 func _process(_delta):
-    if interact_target != null and Input.is_action_pressed("interact"):
+    if interact_target != null and Input.is_action_just_pressed("interact"):
         if interact_target is Chatable:
-            (interact_target as Chatable).chat()
+            interact_target.chat()
 
 func _physics_process(delta):
+    if interact_target != null and interact_target.talking:
+        return
+
     if layer_target != null:
         if layer_start == null:
             layer_start = position.z
@@ -94,7 +100,7 @@ func _on_animated_sprite_2d_animation_finished():
 func _on_area_3d_body_entered(body):
     if body is CharacterBody3D:
         interact_prompt.disabled = false
-        interact_target = body as CharacterBody3D
+        interact_target = body as Chatable
 
 func _on_area_3d_body_exited(body):
     if body is CharacterBody3D:

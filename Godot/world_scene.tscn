@@ -1,6 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://b7xyrodcub2p7"]
+[gd_scene load_steps=29 format=3 uid="uid://duevkcs6lgjb8"]
 
-[ext_resource type="PackedScene" uid="uid://bc0x7thlj3i2" path="res://player.tscn" id="1_i4pft"]
+[ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://player.tscn" id="1_i4pft"]
 [ext_resource type="Script" path="res://src/Chatable.gd" id="2_42c1c"]
 [ext_resource type="Texture2D" uid="uid://5dlji68d7tau" path="res://icon.svg" id="2_dax4t"]
 [ext_resource type="Script" path="res://src/DialogueBox.gd" id="4_g0q5k"]
@@ -498,7 +498,7 @@ mesh = SubResource("PlaneMesh_grj13")
 
 [node name="Snubbe" type="CharacterBody3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37157, 0, 0.0853626)
-collision_layer = 3
+collision_layer = 2
 script = ExtResource("2_42c1c")
 character_name = "snubbe"
 
@@ -545,6 +545,7 @@ size_flags_stretch_ratio = 2.0
 [node name="MarginContainer" type="MarginContainer" parent="DialogueBox" node_paths=PackedStringArray("history_panel")]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 2
 mouse_filter = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10

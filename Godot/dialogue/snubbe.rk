@@ -1,10 +1,3 @@
-character snubbe "Snubbe"
-snubbe.talked = 0
-
-character me "Me"
-me.appointments = 0
-me.ghost_hint = 0
-
 jump first_chat if snubbe.talked == 0
 jump not_now if snubbe.talked == 1
 
@@ -29,11 +22,11 @@ relate:
 again:
     me "Sorry, "again"?"
     snubbe "Ah, yeah... I don't like to mention it too much, but xe were a ghost."
-    jump ghost_revelation_1 if me.ghost_hint == 0
-    jump ghost_support_1 if me.ghost_hint == 1
+    jump ghost_revelation_1 if clues.ghost_hint == 0
+    jump ghost_support_1 if clues.ghost_hint == 1
 
 ghost_revelation_1:
-    me.ghost_hint = 1
+    clues.ghost_hint = 1
     me "Wow. I didn't know living people could date ghosts, tell me more?"
     snubbe "Nah pal, I don't want to talk about it."
     "That didn't go great. I should probably leave them alone for a bit."
@@ -51,21 +44,21 @@ appointment:
     me "I have! I'm sure it's much more common than you think. Hey, why don't you drop by my office some time and tell me about your experience? I'm something of an expert when it comes to stuff like this."
     snubbe "That sounds nice. I'll drop by tomorrow."
     me "Take care, friend."
-    me.appointments += 1
+    appointments += 1
     "Well, I might not have learned anything new, but maybe I'll be able to during their appointment."
     jump end
 
 condolences:
     me "I'm really sorry to hear that."
-    jump ghost_revelation_2 if me.ghost_hint == 0
-    jump ghost_support_1 if me.ghost_hint == 1
+    jump ghost_revelation_2 if clues.ghost_hint == 0
+    jump ghost_support_1 if clues.ghost_hint == 1
 
 ghost_revelation_2:
     me "It's really messed up that you had to go through that, let alone more than once."
     snubbe "Oh."
     snubbe "Sorry, I didn't mean..."
     snubbe "I don't like to talk about it too much, but xe were a ghost."
-    me.ghost_hint = 1
+    clues.ghost_hint = 1
     me "A ghost?"
     snubbe "Yeah."
     snubbe "I dated a ghost, okay?"
@@ -85,6 +78,10 @@ ghost_support_2:
     snubbe "Yeah, me either pal. I thought we were forever, you know?"
     me "I get that."
     jump appointment
+
+pitch:
+    "This is unimplemented. Yell at Mojken some about it."
+    jump end
 
 not_now:
     me "Hey friend."

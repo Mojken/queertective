@@ -1,6 +1,9 @@
 class_name LineBox
-extends TextEdit
+extends Control
 
+@export var label : RichTextLabel
+@export var before : Control
+@export var after : Control
 @export var line = ""
 var character = ""
 var finished = false
@@ -14,13 +17,25 @@ func add_line(new_line):
     set_process(true)
 
 func rush():
-    text += line.substr(counter)
+    if counter == 0:
+        label.text += line
+    else:
+        label.text += line.substr(counter)
     counter = len(line)
     finished = true
 
 func _ready():
     if character != null:
-        text = character + "\n"
+        if character == "Me":
+            before.visible = true
+            label.text = "[right][b]" + character + "[/b]\n"
+        else:
+            after.visible = true
+            label.text = "[b]" + character + "[/b]\n"
+    else:
+        before.visible = true
+        after.visible = true
+        label.text = "[center]"
 
 func _process(delta):
     if finished:
@@ -31,11 +46,10 @@ func _process(delta):
         timer -= delta * 20
 
     if timer <= 0:
-        var char = line[counter]
-        text += char
-        counter += 1
-
         if counter < len(line):
+            var char = line[counter]
+            label.text += char
+            counter += 1
             match char:
                 ".":
                     timer += 4

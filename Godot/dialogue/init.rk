@@ -1,0 +1,10 @@
+character me "Me"
+appointments = 0
+
+# Fake character to trigger clue handling. Consider replacing with custom regex thingy.
+character clues "Clue"
+clues.ghost_hint = 0
+
+# People
+character snubbe "Snubbe"
+snubbe.talked = 0

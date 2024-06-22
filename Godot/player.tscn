@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc0x7thlj3i2"]
+[gd_scene load_steps=7 format=3 uid="uid://b57gjlgrdq3ys"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_7gq05"]
 [ext_resource type="Texture2D" uid="uid://5dlji68d7tau" path="res://icon.svg" id="2_nhv3x"]
@@ -20,6 +20,7 @@ size = Vector3(0.713245, 1.17569, 1.40726)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492541, 0.701067)
+collision_layer = 0
 script = ExtResource("1_7gq05")
 
 [node name="CollisionShape2D" type="CollisionShape3D" parent="."]
@@ -52,6 +53,7 @@ texture = ExtResource("2_nhv3x")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102099, 0)
+collision_layer = 0
 collision_mask = 2
 monitorable = false
 
