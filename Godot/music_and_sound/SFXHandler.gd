@@ -22,69 +22,69 @@ extends Node2D
 var current_audio_stream_player_index = 0
 
 enum SOUND_EFFECT {
-    example_sound_effect_1,
-    example_sound_effect_2,
+	example_sound_effect_1,
+	example_sound_effect_2,
 }
 
 var sound_effects = {
-    SOUND_EFFECT.example_sound_effect_1: preload("res://music_and_sound/sound_effects/example_sound_effect_1.mp3"),
-    SOUND_EFFECT.example_sound_effect_2: preload("res://music_and_sound/sound_effects/example_sound_effect_2.mp3")
+	SOUND_EFFECT.example_sound_effect_1: preload("res://music_and_sound/sound_effects/example_sound_effect_1.mp3"),
+	SOUND_EFFECT.example_sound_effect_2: preload("res://music_and_sound/sound_effects/example_sound_effect_2.mp3")
 }
 
 func play_sound_effect(sound_effect, pitch = 1.0):
-    var current_stream = audio_stream_players[current_audio_stream_player_index].stream
-    var new_stream = sound_effects[sound_effect]
-    var current_pitch = audio_stream_players[current_audio_stream_player_index].pitch_scale
-    var new_pitch = pitch
-    if current_stream != new_stream or current_pitch != new_pitch:
-        set_new_active_audio_stream_player(new_stream, new_pitch)
-                                    
-    audio_stream_players[current_audio_stream_player_index].play()
+	var current_stream = audio_stream_players[current_audio_stream_player_index].stream
+	var new_stream = sound_effects[sound_effect]
+	var current_pitch = audio_stream_players[current_audio_stream_player_index].pitch_scale
+	var new_pitch = pitch
+	if current_stream != new_stream or current_pitch != new_pitch:
+		set_new_active_audio_stream_player(new_stream, new_pitch)
+									
+	audio_stream_players[current_audio_stream_player_index].play()
 
 
 func set_new_active_audio_stream_player(stream, pitch):
-    if current_audio_stream_player_index == audio_stream_players.size() - 1:
-        current_audio_stream_player_index = 0
-    else:
-        current_audio_stream_player_index += 1
-                                    
-    audio_stream_players[current_audio_stream_player_index].stream = stream
-    audio_stream_players[current_audio_stream_player_index].pitch_scale = pitch
+	if current_audio_stream_player_index == audio_stream_players.size() - 1:
+		current_audio_stream_player_index = 0
+	else:
+		current_audio_stream_player_index += 1
+									
+	audio_stream_players[current_audio_stream_player_index].stream = stream
+	audio_stream_players[current_audio_stream_player_index].pitch_scale = pitch
 
 
 func set_volume(new_volume): # 0.0 - 1.0 where 0.5 = default volume, 0.0 = muted and 1.0 = double default volume.
 
-    # Directly changing dB on an AudioStreamPlayer gives some strange results when changing volume.
-    # Using linear_to_db() instead makes it sound as expected because then it gives a linear volume change.
-    # linear_to_db() uses a volume parameter between 0.0 - 1.0 where 1.0 is default volume and 0.0 is muted.
-    #
-    # However... it would be nice if the default volume was in the middle of a volume slider and you could also linearly increase the volume.
-    # +10dB would be perceived as double volume so then the input parameters to linear_to_db() would have to be between 0.0 and 3.16.
-    # Add some math to convert things so 0.5 becomes default. 0.0 becomes -100% and 1.0 becomes +100%
-    
-    if new_volume == 0.5:
-        new_volume = 1.0
-    elif new_volume > 0.5:
-        var percent = (new_volume/0.5) - 1.0
-        new_volume = 1.0 + ((db_to_linear(10.0) - 1.0) * percent)
-    elif new_volume < 0.5:
-        new_volume *= 2.0
+	# Directly changing dB on an AudioStreamPlayer gives some strange results when changing volume.
+	# Using linear_to_db() instead makes it sound as expected because then it gives a linear volume change.
+	# linear_to_db() uses a volume parameter between 0.0 - 1.0 where 1.0 is default volume and 0.0 is muted.
+	#
+	# However... it would be nice if the default volume was in the middle of a volume slider and you could also linearly increase the volume.
+	# +10dB would be perceived as double volume so then the input parameters to linear_to_db() would have to be between 0.0 and 3.16.
+	# Add some math to convert things so 0.5 becomes default. 0.0 becomes -100% and 1.0 becomes +100%
+	
+	if new_volume == 0.5:
+		new_volume = 1.0
+	elif new_volume > 0.5:
+		var percent = (new_volume/0.5) - 1.0
+		new_volume = 1.0 + ((db_to_linear(10.0) - 1.0) * percent)
+	elif new_volume < 0.5:
+		new_volume *= 2.0
 
-    for audio_stream_player in audio_stream_players:
-        audio_stream_player.volume_db = linear_to_db(new_volume)
-                                                                
-                                                                
+	for audio_stream_player in audio_stream_players:
+		audio_stream_player.volume_db = linear_to_db(new_volume)
+																
+																
 func get_volume():
-    var linear_volume = db_to_linear(audio_stream_players[0].volume_db)
-    if linear_volume == 1.0:
-        return 0.5
-    elif linear_volume > 1.0:
-        var percent = ((linear_volume - 1.0)) / (db_to_linear(10.0) - 1.0)
-        return 0.5 + (0.5 * percent)
-    elif linear_volume < 1.0:
-        return linear_volume * 0.5
-                                                                
-                                
+	var linear_volume = db_to_linear(audio_stream_players[0].volume_db)
+	if linear_volume == 1.0:
+		return 0.5
+	elif linear_volume > 1.0:
+		var percent = ((linear_volume - 1.0)) / (db_to_linear(10.0) - 1.0)
+		return 0.5 + (0.5 * percent)
+	elif linear_volume < 1.0:
+		return linear_volume * 0.5
+																
+								
 
 # TEST
 #func _physics_process(delta):

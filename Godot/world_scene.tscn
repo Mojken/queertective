@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://duevkcs6lgjb8"]
 
-[ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://player.tscn" id="1_i4pft"]
+[ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://characters/player/player.tscn" id="1_i4pft"]
 [ext_resource type="Script" path="res://src/Chatable.gd" id="2_42c1c"]
 [ext_resource type="Texture2D" uid="uid://5dlji68d7tau" path="res://icon.svg" id="2_dax4t"]
 [ext_resource type="Script" path="res://src/DialogueBox.gd" id="4_g0q5k"]
@@ -181,6 +181,7 @@ camera_attributes = SubResource("CameraAttributesPractical_np8lb")
 transform = Transform3D(0.965926, -0.25, 0.0669873, 0, 0.258819, 0.965926, -0.258819, -0.933013, 0.25, 3.3387, 4.59197, 1.55261)
 
 [node name="Player" parent="." node_paths=PackedStringArray("interact_prompt") instance=ExtResource("1_i4pft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492541, 1.37614)
 interact_prompt = NodePath("../InputIndicator/DirectionIndicator5")
 
 [node name="InputIndicator" type="GridContainer" parent="."]

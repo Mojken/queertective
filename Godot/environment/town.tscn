@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbc1xwqxdmtpv"]
+
+[ext_resource type="Texture2D" uid="uid://du8xmy7bxr41w" path="res://environment/placeholder_town.png" id="1_obrpm"]
+[ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://characters/player/player.tscn" id="2_4wiol"]
+[ext_resource type="PackedScene" uid="uid://cr7bys5w64g2t" path="res://characters/npcs/npc.tscn" id="3_5iijs"]
+[ext_resource type="Texture2D" uid="uid://b6c275ecpsnwy" path="res://characters/npcs/placeholder_character_2.png" id="4_xjka7"]
+[ext_resource type="Texture2D" uid="uid://borqniiq25e4n" path="res://characters/npcs/placeholder_character_3.png" id="5_x5v02"]
+[ext_resource type="Texture2D" uid="uid://ouwdfgf8cepr" path="res://environment/placeholder_tree.png" id="6_oodxm"]
+[ext_resource type="Texture2D" uid="uid://plori6tictle" path="res://environment/placeholder_bush.png" id="7_5jbh4"]
+[ext_resource type="Texture2D" uid="uid://cj3f3hqr108s3" path="res://environment/placeholder_lanter.png" id="8_7gy3k"]
+[ext_resource type="Texture2D" uid="uid://cg335hr28u0wl" path="res://environment/walk_path.png" id="9_l6b3h"]
+
+[node name="Town" type="Node3D"]
+
+[node name="town" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.18, 5.314, -0.2)
+texture = ExtResource("1_obrpm")
+
+[node name="town2" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 35.0374, 5.314, -0.2)
+texture = ExtResource("1_obrpm")
+
+[node name="Player" parent="." instance=ExtResource("2_4wiol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.493, 0.01)
+
+[node name="npc" parent="." instance=ExtResource("3_5iijs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.04715, 0.732677, 0)
+
+[node name="npc2" parent="." instance=ExtResource("3_5iijs")]
+transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 4.67213, 0.678646, 0)
+texture = ExtResource("4_xjka7")
+
+[node name="npc3" parent="." instance=ExtResource("3_5iijs")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -5.63391, 0.853956, 0)
+texture = ExtResource("5_x5v02")
+
+[node name="tree" type="Sprite3D" parent="."]
+transform = Transform3D(1.95, 0, 0, 0, 1.95, 0, 0, 0, 1.95, 1.738, 1.87909, -0.07)
+texture = ExtResource("6_oodxm")
+
+[node name="tree2" type="Sprite3D" parent="."]
+transform = Transform3D(1.95, 0, 0, 0, 1.95, 0, 0, 0, 1.95, 6.53834, 1.87909, -0.07)
+texture = ExtResource("6_oodxm")
+
+[node name="bush" type="Sprite3D" parent="."]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, -2.94414, -0.182307, 0.22)
+texture = ExtResource("7_5jbh4")
+
+[node name="lantern" type="Sprite3D" parent="."]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -4.34257, 0.560328, 0.22)
+texture = ExtResource("8_7gy3k")
+
+[node name="lantern2" type="Sprite3D" parent="."]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -7.10979, 1.4774, -0.07)
+texture = ExtResource("8_7gy3k")
+
+[node name="walkpath" type="Sprite3D" parent="."]
+transform = Transform3D(0.33, 0, 0, 0, 0.32684, 0.0455621, 0, -0.0455621, 0.32684, 0.118298, -1.95216, -3.80077)
+visible = false
+texture = ExtResource("9_l6b3h")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 2000)
