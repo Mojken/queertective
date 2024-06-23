@@ -23,3 +23,29 @@ Usually artists or dreamers
 ** The player character
 A classic film noir detective, but with a queer colourful coat instead of the usual black or tan leather.
 They smoke a pipe that emits smoke that shifts through the colours of a rainbow
+* TODO
+** TODO Systems
+*** DONE Dialogue
+*** DONE Audio
+*** TODO Clue
+*** TODO Suggesting
+*** TODO Layered world rework
+*** Stretch goals
+**** TODO World interactables and indoors
+**** TODO Day-night-cycle
+**** TODO Appointments
+**** TODO Pride-flag drawing system
+** Content
+*** TODO Audio
+*** TODO Player character assets
+*** TODO Alien character assets
+*** TODO World assets
+*** TODO UI assets
+**** TODO Dialogue
+**** TODO Clues
+**** TODO Suggestion screen
+*** Stretch goals
+**** TODO Alien character behavioural scripting
+** Exploration
+*** TODO 2D alternative
+*** TODO Camera settings and visual polish
