@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://b57gjlgrdq3ys"]
+
+[ext_resource type="Script" path="res://PlayerController.gd" id="1_7gq05"]
+[ext_resource type="Texture2D" uid="uid://5dlji68d7tau" path="res://icon.svg" id="2_nhv3x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0kij2"]
+radius = 0.1
+height = 1.14949
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n3mqr"]
+size = Vector2(1, 2)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_psfb5"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 5.06
+dof_blur_amount = 0.23
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ty51"]
+size = Vector3(0.713245, 1.17569, 1.40726)
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492541, 0.701067)
+collision_layer = 0
+script = ExtResource("1_7gq05")
+
+[node name="CollisionShape2D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.082, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="CollisionShape2D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.082, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+sorting_offset = 0.1
+pixel_size = 0.5
+texture = SubResource("PlaceholderTexture2D_n3mqr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.765866, 1.64634)
+attributes = SubResource("CameraAttributesPractical_psfb5")
+projection = 2
+fov = 84.3628
+size = 0.9
+frustum_offset = Vector2(0, 0.1)
+near = 0.343
+
+[node name="Face" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394421, 0)
+sorting_offset = 0.2
+pixel_size = 0.004
+texture = ExtResource("2_nhv3x")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102099, 0)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_2ty51")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

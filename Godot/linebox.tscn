@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn7gg65xvd80e"]
+
+[ext_resource type="Script" path="res://src/LineBox.gd" id="1_exc1p"]
+
+[node name="LineBox" type="HBoxContainer" node_paths=PackedStringArray("label", "before", "after")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_exc1p")
+label = NodePath("Label")
+before = NodePath("before")
+after = NodePath("after")
+
+[node name="before" type="Control" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="after" type="Control" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
