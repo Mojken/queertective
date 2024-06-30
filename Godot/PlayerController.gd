@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var interact_prompt : Button
 var interact_target = null
 
-@onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite : AnimatedSprite3D = $Sprite3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -76,13 +76,13 @@ func _physics_process(delta):
             layer_target = position.z + corridor_spacing - mod_pos + 0.1
         elif velocity.z < 0:
             layer_target = position.z - mod_pos + corridor_width - 0.1
-    #update_animation()
-    #update_facing_direction()
+    update_animation()
+    update_facing_direction()
 
 func update_animation():
     if not animation_locked:
-        if direction.x != 0:
-            animated_sprite.play("run")
+        if direction.x != 0 or direction.y != 0:
+            animated_sprite.play("walk")
         else:
             animated_sprite.play("idle")
 
