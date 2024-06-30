@@ -98,11 +98,11 @@ func _on_animated_sprite_2d_animation_finished():
 
 
 func _on_area_3d_body_entered(body):
-    if body is CharacterBody3D:
+    if body is Chatable:
         interact_prompt.disabled = false
-        interact_target = body as Chatable
+        interact_target = body
 
 func _on_area_3d_body_exited(body):
-    if body is CharacterBody3D:
+    if body is Chatable:
         interact_prompt.disabled = true
         interact_target = null

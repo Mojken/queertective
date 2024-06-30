@@ -1,8 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://duevkcs6lgjb8"]
+[gd_scene load_steps=27 format=3 uid="uid://duevkcs6lgjb8"]
 
 [ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://player.tscn" id="1_i4pft"]
 [ext_resource type="Script" path="res://src/Chatable.gd" id="2_42c1c"]
-[ext_resource type="Texture2D" uid="uid://5dlji68d7tau" path="res://icon.svg" id="2_dax4t"]
+[ext_resource type="Texture2D" uid="uid://bysstn8468ju0" path="res://graphics/npc1.png" id="3_2wroo"]
 [ext_resource type="Script" path="res://src/DialogueBox.gd" id="4_g0q5k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_neuk5"]
@@ -158,18 +158,9 @@ albedo_color = Color(0.14902, 0.14902, 0.14902, 1)
 material = SubResource("StandardMaterial3D_mmm4m")
 size = Vector2(100, 100)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ybgpe"]
-size = Vector3(0.613, 1.84, 0.01)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrhuk"]
-albedo_texture = ExtResource("2_dax4t")
-uv1_scale = Vector3(2, 3, 1)
-uv1_offset = Vector3(0.5, 0.3, 0)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_glx2j"]
-radius = 0.2
-height = 1.84
-rings = 1
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0kij2"]
+radius = 0.1
+height = 0.809533
 
 [node name="Node2D" type="Node3D"]
 
@@ -497,19 +488,25 @@ shape = SubResource("WorldBoundaryShape3D_25gig")
 mesh = SubResource("PlaneMesh_grj13")
 
 [node name="Snubbe" type="CharacterBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37157, 0, 0.0853626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37157, 0.476155, 0.207987)
 collision_layer = 2
 script = ExtResource("2_42c1c")
 character_name = "snubbe"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Snubbe"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
-shape = SubResource("BoxShape3D_ybgpe")
+[node name="CollisionShape2D" type="CollisionShape3D" parent="Level/Snubbe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -0.0529062, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Snubbe"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
-material_override = SubResource("StandardMaterial3D_jrhuk")
-mesh = SubResource("CapsuleMesh_glx2j")
+[node name="CollisionShape2D2" type="CollisionShape3D" parent="Level/Snubbe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.053, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="Sprite3D" type="Sprite3D" parent="Level/Snubbe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0247517, -0.0238263, 0)
+sorting_offset = 0.1
+pixel_size = 0.004
+texture_filter = 2
+texture = ExtResource("3_2wroo")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44395, 0.63532)

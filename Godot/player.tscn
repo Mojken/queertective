@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0kij2"]
 radius = 0.1
-height = 1.14949
+height = 0.809533
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_psfb5"]
 dof_blur_far_enabled = true
@@ -21,11 +21,11 @@ collision_layer = 0
 script = ExtResource("1_7gq05")
 
 [node name="CollisionShape2D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.082, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.0616731, 0)
 shape = SubResource("CapsuleShape3D_0kij2")
 
 [node name="CollisionShape2D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.082, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.0616731, 0)
 shape = SubResource("CapsuleShape3D_0kij2")
 
 [node name="Camera3D" type="Camera3D" parent="."]
