@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/LineBox.gd" id="1_exc1p"]
 
-[node name="LineBox" type="HBoxContainer" node_paths=PackedStringArray("label", "before", "after")]
+[node name="LineBox" type="HBoxContainer" node_paths=PackedStringArray("label", "after")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,7 +11,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_exc1p")
 label = NodePath("Label")
-before = NodePath("")
 after = NodePath("after")
 
 [node name="Label" type="RichTextLabel" parent="."]
@@ -29,3 +28,4 @@ scroll_active = false
 [node name="after" type="Control" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2

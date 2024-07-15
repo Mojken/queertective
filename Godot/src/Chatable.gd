@@ -2,6 +2,7 @@ class_name Chatable
 extends CharacterBody3D
 
 @export var character_name : String = ""
+@onready var marker : Vector3 = $Marker.position
 var talking : bool = false
 var talk_delay : int = 0
 

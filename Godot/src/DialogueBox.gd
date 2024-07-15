@@ -10,12 +10,11 @@ var last_linebox : LineBox = null
 @onready var line_box : PackedScene = preload("res://linebox.tscn")
 
 func spawn_line_box(charname, line):
-    if charname == last_char:
+    if last_char != null and charname == last_char:
         last_linebox.add_line(line)
         history[-1] = last_linebox.line
         return last_linebox
-    else:
-        last_char = charname
+    last_char = charname
 
     var box = line_box.instantiate()
     box.line = line

@@ -111,7 +111,7 @@ sorting_offset = 0.1
 pixel_size = 0.004
 texture_filter = 2
 sprite_frames = ExtResource("2_51y5f")
-animation = &"walk"
+animation = &"idle"
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102099, 0)

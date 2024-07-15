@@ -20,6 +20,7 @@ var layer_acc = 0
 
 func _ready():
     # DEBUG: if introduction was skipped, load character init file
+    push_error("Ignore this error, it's caused by debug environment only:")
     if Rakugo.get_character("me") == {}:
         Rakugo.parse_and_execute_script("res://dialogue/init.rk")
 
@@ -32,9 +33,10 @@ func _process(_delta):
 func _physics_process(delta):
     self.set_collision_mask_value(2, true)
     if interact_target != null and interact_target.talking:
-        var direction3 = self.position - (interact_target.position + Vector3(-0.5, 0.0, 0.05))
+        var direction3 : Vector3 = self.position - (interact_target.position + interact_target.marker)
+        var direction2 = Vector2(direction3.x, direction3.z)
         self.set_collision_mask_value(2, false)
-        if direction3.length_squared() < 0.01:
+        if direction2.length_squared() < 0.01:
             direction = Vector2.ZERO
             animated_sprite.flip_h = false
         else:

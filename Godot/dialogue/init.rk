@@ -2,7 +2,7 @@ character me "[color=blueviolet]Detective[/color]"
 
 # Fake character to trigger clue handling. Consider replacing with custom regex thingy.
 character clues "Clue"
-clues.knows_band_name = 1
+clues.knows_band_name = 0
 clues.ghost_concert = 0
 
 # People
