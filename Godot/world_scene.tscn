@@ -1,15 +1,18 @@
 [gd_scene load_steps=27 format=3 uid="uid://duevkcs6lgjb8"]
 
+[ext_resource type="Texture2D" uid="uid://cydkf7j58kaln" path="res://graphics/background_sky.png" id="1_c6ey5"]
 [ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://player.tscn" id="1_i4pft"]
 [ext_resource type="Script" path="res://src/Chatable.gd" id="2_42c1c"]
 [ext_resource type="Texture2D" uid="uid://bysstn8468ju0" path="res://graphics/npc1.png" id="3_2wroo"]
-[ext_resource type="Script" path="res://src/DialogueBox.gd" id="4_g0q5k"]
+[ext_resource type="Material" uid="uid://b3me7ruqiqg8q" path="res://floor_material.tres" id="3_mmqj1"]
+[ext_resource type="PackedScene" uid="uid://ntmuwwp42ttp" path="res://dialogue_box.tscn" id="4_qumot"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_neuk5"]
-sky_energy_multiplier = 2.2
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jqtjw"]
+panorama = ExtResource("1_c6ey5")
 
 [sub_resource type="Sky" id="Sky_vb6x1"]
-sky_material = SubResource("ProceduralSkyMaterial_neuk5")
+sky_material = SubResource("PanoramaSkyMaterial_jqtjw")
+process_mode = 1
 
 [sub_resource type="Environment" id="Environment_uo8p0"]
 background_mode = 2
@@ -20,77 +23,9 @@ ssao_enabled = true
 ssao_power = 4.54715
 volumetric_fog_density = 0.0
 adjustment_enabled = true
-adjustment_brightness = 1.02
-adjustment_contrast = 1.1
-adjustment_saturation = 2.12
+adjustment_saturation = 1.1
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_np8lb"]
-
-[sub_resource type="GDScript" id="GDScript_l0fj2"]
-script/source = "extends Button
-
-@export var action : StringName = \"\"
-
-var replace = {
-    \"Up\": \"↑\",
-    \"Down\": \"↓\",
-    \"Left\": \"←\",
-    \"Right\": \"→\",
-    \"(Unset)\": \"\",
-    \"Escape\": \"Esc\",
-    \"Space\": \"␣\",
-    \"Exclam\": \"!\",
-    \"QuoteDbl\": '\"',
-    \"NumberSign\": \"#\",
-    \"Dollar\": \"$\",
-    \"Percent\": \"%\",
-    \"Ampersand\": \"&\",
-    \"Apostrophe\": \"'\",
-    \"ParenLeft\": \"(\",
-    \"ParenRight\": \")\",
-    \"Asterisk\": \"*\",
-    \"Plus\": \"+\",
-    \"Comma\": \",\",
-    \"Minus\": \"-\",
-    \"Period\": \".\",
-    \"Slash\": \"/\",
-    \"Colon\": \":\",
-    \"Semicolon\": \";\",
-    \"Less\": \"<\",
-    \"Equal\": \"=\",
-    \"Greater\": \">\",
-    \"Question\": \"?\",
-    \"BracketLeft\": \"[\",
-    \"BackSlash\": \"\\\\\",
-    \"BracketRight\": \"]\",
-    \"AsciiCircum\": \"^\",
-    \"UnderScore\": \"_\",
-    \"QuoteLeft\": \"`\",
-    \"BraceLeft\": \"}\",
-    \"Bar\": \"|\",
-    \"BraceRight\": \"{\",
-    \"AsciiTilde\": \"~\",
-}
-
-func _ready():
-    self.disabled = false
-    var inputs = InputMap.action_get_events(action)
-    self.text = \"\"
-    for button in inputs:
-        button = button as InputEventKey
-        var alts = [button.as_text_keycode(), button.as_text_key_label(), OS.get_keycode_string(button.unicode)]
-        for alt in alts:
-            if alt in replace:
-                self.text += replace[alt]
-            else:
-                self.text += alt.substr(0,3).to_upper()
-
-func _process(_delta):
-    if Input.is_action_pressed(action):
-        self.button_pressed = true
-    else:
-        self.button_pressed = false
-"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yl6d5"]
 size = Vector3(17.5, 1.687, 3.8)
@@ -102,15 +37,17 @@ size = Vector3(2.5, 1.687, 20)
 size = Vector3(2.60042, 0.156187, 0.313204)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6as37"]
-size = Vector3(0.5, 0.156, 0.624)
+size = Vector3(0.5, 0.15, 0.624)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sqjpm"]
+material = ExtResource("3_mmqj1")
 size = Vector3(0.5, 0.156, 0.624)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_urxtu"]
 size = Vector3(5, 0.156, 0.624)
 
 [sub_resource type="BoxMesh" id="BoxMesh_t1wkv"]
+material = ExtResource("3_mmqj1")
 size = Vector3(5, 0.1, 0.624)
 
 [sub_resource type="GDScript" id="GDScript_hkoym"]
@@ -151,11 +88,8 @@ size = Vector3(2.5, 1.687, 0.03)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_25gig"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmm4m"]
-albedo_color = Color(0.14902, 0.14902, 0.14902, 1)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_grj13"]
-material = SubResource("StandardMaterial3D_mmm4m")
+material = ExtResource("3_mmqj1")
 size = Vector2(100, 100)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0kij2"]
@@ -171,67 +105,9 @@ camera_attributes = SubResource("CameraAttributesPractical_np8lb")
 [node name="Sunlight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.965926, -0.25, 0.0669873, 0, 0.258819, 0.965926, -0.258819, -0.933013, 0.25, 3.3387, 4.59197, 1.55261)
 
-[node name="Player" parent="." node_paths=PackedStringArray("interact_prompt") instance=ExtResource("1_i4pft")]
-interact_prompt = NodePath("../InputIndicator/DirectionIndicator5")
-
-[node name="InputIndicator" type="GridContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.0
-offset_top = -33.0
-offset_right = 37.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-columns = 3
-
-[node name="Control" type="Control" parent="InputIndicator"]
-layout_mode = 2
-
-[node name="DirectionIndicator" type="Button" parent="InputIndicator"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-mouse_filter = 2
-toggle_mode = true
-script = SubResource("GDScript_l0fj2")
-action = &"up"
-
-[node name="DirectionIndicator5" type="Button" parent="InputIndicator"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-mouse_filter = 2
-toggle_mode = true
-script = SubResource("GDScript_l0fj2")
-action = &"interact"
-
-[node name="DirectionIndicator2" type="Button" parent="InputIndicator"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-mouse_filter = 2
-toggle_mode = true
-script = SubResource("GDScript_l0fj2")
-action = &"left"
-
-[node name="DirectionIndicator3" type="Button" parent="InputIndicator"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-mouse_filter = 2
-toggle_mode = true
-script = SubResource("GDScript_l0fj2")
-action = &"down"
-
-[node name="DirectionIndicator4" type="Button" parent="InputIndicator"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-mouse_filter = 2
-toggle_mode = true
-script = SubResource("GDScript_l0fj2")
-action = &"right"
+[node name="Player" parent="." instance=ExtResource("1_i4pft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.485746, 0.701067)
+collision_mask = 3
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -340,7 +216,7 @@ operation = 2
 size = Vector3(0.15, 0.15, 0.32)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Level/Staircase"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33359, -0.014277, -0.0310596)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33359, -0.0137261, -0.0310596)
 shape = SubResource("BoxShape3D_6as37")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Staircase/CollisionShape3D2"]
@@ -487,21 +363,21 @@ shape = SubResource("WorldBoundaryShape3D_25gig")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Floor"]
 mesh = SubResource("PlaneMesh_grj13")
 
-[node name="Snubbe" type="CharacterBody3D" parent="Level"]
+[node name="Client" type="CharacterBody3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37157, 0.476155, 0.207987)
 collision_layer = 2
 script = ExtResource("2_42c1c")
-character_name = "snubbe"
+character_name = "client"
 
-[node name="CollisionShape2D" type="CollisionShape3D" parent="Level/Snubbe"]
+[node name="CollisionShape2D" type="CollisionShape3D" parent="Level/Client"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -0.0529062, 0)
 shape = SubResource("CapsuleShape3D_0kij2")
 
-[node name="CollisionShape2D2" type="CollisionShape3D" parent="Level/Snubbe"]
+[node name="CollisionShape2D2" type="CollisionShape3D" parent="Level/Client"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.053, 0)
 shape = SubResource("CapsuleShape3D_0kij2")
 
-[node name="Sprite3D" type="Sprite3D" parent="Level/Snubbe"]
+[node name="Sprite3D" type="Sprite3D" parent="Level/Client"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0247517, -0.0238263, 0)
 sorting_offset = 0.1
 pixel_size = 0.004
@@ -527,61 +403,17 @@ virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
 wrap_mode = 1
 
-[node name="DialogueBox" type="HBoxContainer" parent="."]
+[node name="UI" type="HBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="DialogueBox"]
+[node name="Control" type="Control" parent="UI"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="MarginContainer" type="MarginContainer" parent="DialogueBox" node_paths=PackedStringArray("history_panel")]
+[node name="DialogueBox" parent="UI" instance=ExtResource("4_qumot")]
 layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 2
-mouse_filter = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-script = ExtResource("4_g0q5k")
-history_panel = NodePath("Panel/MarginContainer/ScrollContainer/History")
-
-[node name="Panel" type="Panel" parent="DialogueBox/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="DialogueBox/MarginContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="ScrollContainer" type="ScrollContainer" parent="DialogueBox/MarginContainer/Panel/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-follow_focus = true
-horizontal_scroll_mode = 0
-
-[node name="History" type="VBoxContainer" parent="DialogueBox/MarginContainer/Panel/MarginContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-
-[connection signal="gui_input" from="InputIndicator/DirectionIndicator" to="InputIndicator/DirectionIndicator" method="_on_gui_input"]
-[connection signal="gui_input" from="InputIndicator/DirectionIndicator5" to="InputIndicator/DirectionIndicator5" method="_on_gui_input"]
-[connection signal="gui_input" from="InputIndicator/DirectionIndicator2" to="InputIndicator/DirectionIndicator2" method="_on_gui_input"]
-[connection signal="gui_input" from="InputIndicator/DirectionIndicator3" to="InputIndicator/DirectionIndicator3" method="_on_gui_input"]
-[connection signal="gui_input" from="InputIndicator/DirectionIndicator4" to="InputIndicator/DirectionIndicator4" method="_on_gui_input"]

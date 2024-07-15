@@ -1,0 +1,15 @@
+
+jump introduction
+
+introduction:
+    me "I'm in a pickle. I thought this detective business was gonna be smooth sailing, but I haven't even gotten a single client yet!"
+    me "Maybe I should have listened when people said this would happen, what with the zero crime rate and all. But being a detective is my dream! I mean, look at this getup!"
+    me "But being a detective isn't just a matter of cosplay, I need a Good Hard Mystery to solve. One with heart, drama, dramatic twists, and a dead aunt! Or maybe just someone who needs a bit of help. I'd be happy with that too."
+    me "But the problem is, people here are just too content. Except for one thing, I suppose... Everyone is miserable about who they are."
+    me "Every damn person in this cardboard town thinks they're singular and alone, what they need is community, and maybe, just maybe, I can give them that?"
+    me "I could go around telling people who they are and that they're just like everyone else!"
+    me "Or... maybe I should go about it a little bit differently, but I think I'm really onto something here. I'm good at getting people to open up, after all, and while I don't know jack about identities and sexualities, I'm not a detective for nothing! I'll figure it out!"
+    me "I'm getting really worked up here, I think I'm onto something! Now I just need to wait for a client, and... No, that won't work. Nobody knows that I do this yet. I need to go out there, and find a client myself!"
+    "Objective: Find a client"
+    menu end:
+         "Continue"

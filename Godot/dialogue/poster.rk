@@ -1,0 +1,22 @@
+
+read:
+    "You approach the wall of posters. Among the mess, you find advertising for things like baking drives, concerts, tool libraries, study groups, and postmodernist art workshops."
+    jump nop if clues.knows_band_name == 0
+    jump yep if clues.knows_band_name == 1
+
+nop:
+    "Nothing in particular stands out to you."
+    me "There sure is a lot happening in this town, huh. Nobody in need of my help though, as usual."
+    jump end
+
+yep:
+    clue.concert_poster = 1
+    "One of the concert posters actually mention <client.fav_band>. You step in to read it."
+    "It reads "<client.fav_band> concert for Ghost Awareness""
+    clues.ghost_concert = 1
+    me "Ghost Awareness? It would seem I'm rather in the need of some of that. I should ask somebody about this concert."
+    jump end
+
+end:
+    menu end:
+         "Leave"

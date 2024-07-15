@@ -169,7 +169,7 @@ func get_character(character_tag: String) -> Dictionary:
     character = store_manager.characters.get(character_tag, {})
 
     if character.is_empty():
-        push_error("Rakugo does not knew a character with this tag: " + character_tag)
+        push_error("Unknown Rakugo character " + character_tag)
 
     mutex.unlock()
     return character

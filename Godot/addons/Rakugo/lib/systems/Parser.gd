@@ -280,7 +280,7 @@ func parse_script(lines:PackedStringArray) -> Dictionary:
                 break
 
         if (not have_find_key):
-            push_error("Parser: Error on line: " + str(i+1) + ", can not parse it !")
+            push_error("Rakugo failed to parse line " + str(i+1) + ": " + line)
             return {}
 
     return {"parse_array":parse_array, "labels":labels}

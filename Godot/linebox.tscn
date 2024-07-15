@@ -11,13 +11,8 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_exc1p")
 label = NodePath("Label")
-before = NodePath("before")
+before = NodePath("")
 after = NodePath("after")
-
-[node name="before" type="Control" parent="."]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Label" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(0, 40)
@@ -25,12 +20,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 20
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
 
 [node name="after" type="Control" parent="."]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3

@@ -5,6 +5,7 @@ extends Control
 @export var before : Control
 @export var after : Control
 @export var line = ""
+var next_prompt : Button
 var character = ""
 var finished = false
 var timer = 0
@@ -14,6 +15,7 @@ func add_line(new_line):
     self.line += "\n" + new_line
     finished = false
     timer = 0
+    next_prompt.visible = false
     set_process(true)
 
 func rush():
@@ -27,19 +29,20 @@ func rush():
 func _ready():
     if character != null:
         if character == "Me":
-            before.visible = true
-            label.text = "[right][b]" + character + "[/b]\n"
+            #before.visible = true
+            label.text = "\n[b]" + character + "[/b]\n"
         else:
-            after.visible = true
-            label.text = "[b]" + character + "[/b]\n"
+            #after.visible = true
+            label.text = "\n[b]" + character + "[/b]\n"
     else:
-        before.visible = true
-        after.visible = true
-        label.text = "[center]"
+        label.text = "[i]"
+
+    next_prompt.visible = false
 
 func _process(delta):
     if finished:
         set_process(false)
+        next_prompt.visible = true
         return
 
     if timer > 0:
@@ -52,20 +55,25 @@ func _process(delta):
             counter += 1
             match char:
                 ".":
-                    timer += 4
+                    timer += 6
                 "!":
-                    timer += 4
+                    timer += 6
                 "?":
-                    timer += 4
+                    timer += 6
                 ";":
-                    timer += 4
+                    timer += 6
                 ",":
-                    timer += 2
+                    timer += 3
                 "—":
-                    timer += 2
+                    timer += 4
                 " ":
                     timer += 0
+                "[":
+                    while char != "]":
+                        char = line[counter]
+                        label.text += char
+                        counter += 1
                 _:
-                    timer += 1
+                    timer += 0.8
         else:
             finished = true

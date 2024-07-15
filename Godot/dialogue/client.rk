@@ -1,0 +1,91 @@
+jump first_chat if client.talked == 0
+jump ask_about_clues if client.talked == 1
+
+
+first_chat:
+    client.talked = 1
+    me "Hey, how are you doing, friend?"
+    client_no_name "Oh, Hi. I'm not doing so bad."
+    me "Let me guess, there's nothing you need help with, right? No mysteries to solve or so?"
+    client_no_name "... No?"
+    me "That checks out. I'm a detective, you see, but that's not really been going too well. No clients. Name's Queertective."
+    "You shake hands"
+    client_no_name "<client.name>"
+    me "Pleasure. Say — and I apologise if I'm overstepping boundaries here — did you know that whatever your sexuality and identity is, you're not alone in feeling that way?"
+    client "That's cute, but you're being naive."
+    me "Not at all! In fact, let me prove it to you! I'll use my detective skills to find you your community!"
+    client "I don't know..."
+    me "All you'd need to do it tell me a little bit about yourself, and I'll handle the rest. You shouldn't underestimate a detective, you know!"
+    "She shrugs"
+    client "Eh, why not. So what do you want to know?"
+
+    menu interrogation:
+         "Tell me about your partners" > partners
+         "Tell me about your fashion" > fashion
+         "Tell me about your gender" > gender
+         "That's all for now" > wrapup
+
+
+partners:
+    me "What can you tell me about your current or previous partners?"
+    client "I'm not sure how much there is to say."
+    client "I haven't really dated a whole lot of people, but I guess it's fair to say that they were all older than me."
+    client "Not in a problematic way, of course."
+    client "Or, well, it's a bit complicated I guess, and not all of the relationships were maybe all that healthy, but my current one really is."
+    "You get the sense she really loves her partner."
+
+    me "If you don't mind me asking, how much older are we talking?"
+    client "It's varied quite a lot. They were all people I could vibe with though, I wouldn't date someone that feels like they could be my parent."
+
+    me "Alright. Do you have a gender preference?"
+    client "Hmm... Not really, I guess. Or at least, that's not the important part, for me."
+
+    me "You said some of the relationships were unhealthy, what did you mean?"
+    client "This is obviously pretty personal stuff, but basically some of them felt awkward about dating me, thought their peers wouldn't approve, and they sometimes handled that really poorly."
+    client "I've gotten used to keeping my relationships hidden by now, but the way my current partner handles it has really helped."
+    me "So you've been keeping this relationship quiet as well?"
+    client "Yeah. Like I said, I'm used to it, so it's not a problem. Unfortunately, I can't tell you much more about this."
+    "This part seems relevant, but she won't talk about it with just anybody. Maybe you can find a way to coax it out of her later, or maybe even ask her partner."
+    me "I get that. Sorry you had to get used to something like that, though. Hopefully that's something I can help with."
+    client "I doubt it."
+    me "You're still underestimating detectives! You'll see."
+
+    jump interrogation
+
+
+fashion:
+    me "I like your fashion, and it's quite distinct. What made you want to dress like this?"
+    client "Thank you. I've dressed more or less in this style since I was old enough to chose my own clothes, I loved this cartoon about ghosts who dressed a little bit like this as a child, but my current style is more inspired by the band <client.fav_band>. I actually got into them specifically because of their fashion. They're super cool, maybe you'd like them? I strongly suggest experiencing them live. Don't worry about intruding or anything like that, their community is super welcoming, and-"
+    clues.knows_band_name = 1
+    client "Oh. Sorry. I get carried away when I talk about them."
+    me "That's okay. I can tell you like them a lot."
+    client "I do."
+
+    jump interrogation
+
+
+gender:
+    me "What about your gender? How do you identify?"
+    client "I'm a woman. There's not really much more to say about that."
+    me "Fair enough. She/her?"
+    client "Yup."
+
+    jump interrogation
+
+ask_about_clues:
+    me "Hello. I'm back again, wanted to ask you some questions. Is now a good time?"
+    client "Sure, ask away."
+    menu ask_clues:
+         "About what we initially talked about..." > interrogation
+         "I have found some clues I'd like to ask you about" > end
+
+wrapup:
+    me "Okay, I think I've got enough for now, thank you for your time. I'll swing by again if I have any more questions."
+    client "Okay. See you."
+    me "Bye!"
+    jump end
+
+
+end:
+    menu end:
+         "Leave"

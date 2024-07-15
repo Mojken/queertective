@@ -25,7 +25,7 @@ var music_tracks = {
 func play_music_track(music_track):
     stream = music_tracks[music_track]
     play()
-                                
+
 
 # Fade volume can for example be used if music should fade out when switching scenes
 func fade_volume(to, time_in_seconds):
@@ -43,7 +43,7 @@ func set_volume(new_volume): # 0.0 - 1.0 where 0.5 = default volume, 0.0 = muted
     # However... it would be nice if the default volume was in the middle of a volume slider and you could also linearly increase the volume.
     # +10dB would be perceived as double volume so then the input parameters to linear_to_db() would have to be between 0.0 and 3.16.
     # Add some math to convert things so 0.5 becomes default. 0.0 becomes -100% and 1.0 becomes +100%
-    
+
     if new_volume == 0.5:
         new_volume = 1.0
     elif new_volume > 0.5:
@@ -67,21 +67,21 @@ func get_volume():
 
 
 # TEST
-func _physics_process(delta):
-    if Input.is_action_just_pressed("1"):
-        play_music_track(MUSIC_TRACK.example_music_track_1)
-    elif Input.is_action_just_pressed("2"):
-        play_music_track(MUSIC_TRACK.example_music_track_2)
+#func _physics_process(delta):
+#    if Input.is_action_just_pressed("1"):
+#        play_music_track(MUSIC_TRACK.example_music_track_1)
+#    elif Input.is_action_just_pressed("2"):
+#        play_music_track(MUSIC_TRACK.example_music_track_2)
 
-    elif Input.is_action_just_pressed("3"):
-        set_volume(0.5) # 0.0-1.0
-    elif Input.is_action_just_pressed("5"):
-        print(get_volume())
+#    elif Input.is_action_just_pressed("3"):
+#        set_volume(0.5) # 0.0-1.0
+#    elif Input.is_action_just_pressed("5"):
+#        print(get_volume())
 
-    elif Input.is_action_just_pressed("6"):
-        fade_volume(0.0, 1.0)
-                                                                
-                                                                
-                                                                
-                                                                
-                                                                
+#    elif Input.is_action_just_pressed("6"):
+#        fade_volume(0.0, 1.0)
+
+
+
+
+

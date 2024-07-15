@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://db78j4h3hx3oe"]
+
+[ext_resource type="Script" path="res://Introduction.gd" id="1_6v3j7"]
+[ext_resource type="PackedScene" uid="uid://ntmuwwp42ttp" path="res://dialogue_box.tscn" id="2_aeoou"]
+[ext_resource type="Texture2D" uid="uid://dqkfjxpvhkv0t" path="res://graphics/char_standing.png" id="3_ammli"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lye0t"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Introduction" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6v3j7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lye0t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control2" type="Control" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.0
+texture = ExtResource("3_ammli")
+stretch_mode = 5
+
+[node name="UI" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="DialogueBox" parent="UI" instance=ExtResource("2_aeoou")]
+layout_mode = 2

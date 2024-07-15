@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b57gjlgrdq3ys"]
+[gd_scene load_steps=8 format=3 uid="uid://b57gjlgrdq3ys"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_7gq05"]
 [ext_resource type="SpriteFrames" uid="uid://wydb5rta0vsw" path="res://graphics/player_animation.tres" id="2_51y5f"]
@@ -8,17 +8,86 @@ radius = 0.1
 height = 0.809533
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_psfb5"]
-dof_blur_far_enabled = true
 dof_blur_far_distance = 5.06
 dof_blur_amount = 0.23
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ty51"]
 size = Vector3(0.713245, 1.17569, 1.40726)
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_w5v1q"]
+viewport_path = NodePath("InteractPrompt/SubViewport")
+
+[sub_resource type="GDScript" id="GDScript_x7e70"]
+script/source = "extends Button
+
+@export var action : StringName = \"\"
+
+var replace = {
+    \"Up\": \"↑\",
+    \"Down\": \"↓\",
+    \"Left\": \"←\",
+    \"Right\": \"→\",
+    \"(Unset)\": \"\",
+    \"Escape\": \"Esc\",
+    \"Space\": \"␣\",
+    \"Exclam\": \"!\",
+    \"QuoteDbl\": '\"',
+    \"NumberSign\": \"#\",
+    \"Dollar\": \"$\",
+    \"Percent\": \"%\",
+    \"Ampersand\": \"&\",
+    \"Apostrophe\": \"'\",
+    \"ParenLeft\": \"(\",
+    \"ParenRight\": \")\",
+    \"Asterisk\": \"*\",
+    \"Plus\": \"+\",
+    \"Comma\": \",\",
+    \"Minus\": \"-\",
+    \"Period\": \".\",
+    \"Slash\": \"/\",
+    \"Colon\": \":\",
+    \"Semicolon\": \";\",
+    \"Less\": \"<\",
+    \"Equal\": \"=\",
+    \"Greater\": \">\",
+    \"Question\": \"?\",
+    \"BracketLeft\": \"[\",
+    \"BackSlash\": \"\\\\\",
+    \"BracketRight\": \"]\",
+    \"AsciiCircum\": \"^\",
+    \"UnderScore\": \"_\",
+    \"QuoteLeft\": \"`\",
+    \"BraceLeft\": \"}\",
+    \"Bar\": \"|\",
+    \"BraceRight\": \"{\",
+    \"AsciiTilde\": \"~\",
+}
+
+func _ready():
+    var inputs = InputMap.action_get_events(action)
+    self.text = \"\"
+    for button in inputs:
+        button = button as InputEventKey
+        var keycode = DisplayServer.keyboard_get_keycode_from_physical(button.physical_keycode)
+        var alts = [button.as_text_keycode(), button.as_text_key_label(), OS.get_keycode_string(keycode)]
+        for alt in alts:
+            if alt in replace:
+                self.text += replace[alt]
+            else:
+                self.text += alt.substr(0,3).to_upper()
+
+func _process(_delta):
+    if Input.is_action_pressed(action):
+        self.button_pressed = true
+    else:
+        self.button_pressed = false
+"
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("interact_prompt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492541, 0.701067)
 collision_layer = 0
 script = ExtResource("1_7gq05")
+interact_prompt = NodePath("InteractPrompt/SubViewport/DirectionIndicator5")
 
 [node name="CollisionShape2D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.0616731, 0)
@@ -53,5 +122,29 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_2ty51")
 
+[node name="InteractPrompt" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619596, 0)
+pixel_size = 0.002
+texture = SubResource("ViewportTexture_w5v1q")
+
+[node name="SubViewport" type="SubViewport" parent="InteractPrompt"]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(50, 50)
+
+[node name="DirectionIndicator5" type="Button" parent="InteractPrompt/SubViewport"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 38
+toggle_mode = true
+script = SubResource("GDScript_x7e70")
+action = &"interact"
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="gui_input" from="InteractPrompt/SubViewport/DirectionIndicator5" to="InteractPrompt/SubViewport/DirectionIndicator5" method="_on_gui_input"]
