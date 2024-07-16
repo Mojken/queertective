@@ -1,0 +1,71 @@
+jump concert_again if clues.concert_info == 1
+jump awkward if clubguy.awkward == 1
+jump concert_init if clues.ghost_concert == 1
+jump hellobye
+
+hellobye:
+    me "Hello."
+    clubguy "Hi."
+    me "..."
+    clubguy "..."
+    me "Okay. See you."
+    clubguy "Eh... Sure."
+    clubguy.awkward = 1
+    jump end
+
+awkward:
+    clubguy "Not you again. Look, just go in if you want to, otherwise please just leave me alone."
+    me "Oh."
+    jump awkward_concert if clues.ghost_concert == 1
+    jump end
+
+awkward_concert:
+    me "Sorry."
+    me "I just wanted to ask you about this concert I heard about."
+    "They raise an eyebrow. Or, you assume they do. You can't see their eyes."
+    me "The <client.fav_band> one?"
+    clubguy "Yeah, what about it?"
+    me "Well, what can you tell me about it?"
+    jump concert
+
+concert_init:
+    me "Hello. I have some questions about the <client.fav_band> concert. Are you the right person to talk to?"
+    clubguy "I am! What do you want to know?"
+    me "Well, what can you tell me about it?"
+    jump concert
+
+concert_again:
+    me "Hello, back again. Would you mind repeating what you said about that <client.fav_band> concert?"
+    clubguy "Mh, alright."
+    jump concert
+
+concert:
+    clubguy "<client.fav_band> say they are "pivoting into their Ghost Punk era". From what I can tell, it's mostly a slight aestetic shift into some grungier looks, but this "Ghost Awareness Concert" as they call it might actually end up doing some good, so who knows?"
+    clubguy "Maybe if they keep that kind of thing up, they could go down in history."
+    clubguy "Probably not though."
+    clubguy "Don't get me wrong, I'm happy to be hosting them. If nothing else, they have a very dedicated fanbase. Good for business, and I enjoy using my club for something good every now and then."
+    me "I see. I'm curious about this ghost awareness thing. What do they mean?"
+    clubguy "As you might know, ghosts exist."
+    me "Right."
+    clubguy "But we like to pretend they don't."
+    clubguy "Don't really treat them like normal members of society. Lots of arguments about them being incorporeal and how that somehow means they shouldn't be where physical being interact with physical objects."
+    clubguy "<client.fav_band> thinks that bullshit, and I think they're pretty convincing on that front. Cafés can't have ectoplaceramic plates? They can't bake some ghost goods on the side? Sounds like bullshit to me."
+    clubguy "The excuse is that they chose to stay apart from us living folk, but that's easily refuted by just asking them."
+    clubguy "I guess that's what <client.fav_band> is trying to do with this concert. Just point out that our assumptions about ghosts are incorrect, and that's it's completely viable to have ghosts sharing their space with us."
+    jump concert_wrapup if clues.concert_info == 1
+
+    clues.concert_info = 1
+    me "I can get behind that"
+    clubguy "I'd be a bit concerned if you couldn't."
+    me "Right? Anyway, I think that's all I need to know. Thank you for your time."
+    clubguy "No worries. Please come check out the concert!"
+    jump end
+
+concert_wrapup:
+    me "I think that's all I need to know. Thank you for your time."
+    clubguy "No worries. Please come check out the concert!"
+    jump end
+
+end:
+    menu end:
+         "Leave"

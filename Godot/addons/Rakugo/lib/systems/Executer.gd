@@ -246,8 +246,8 @@ func do_execute_script(parameters:Dictionary):
                 if !rvar_name.is_empty():
                     value = Rakugo.get_variable(rvar_name)
 
-                    if !value:
-                        parameters["error"] = "Executer::do_execute_script::SET_VARIABLE, can not get variable :" + rvar_name
+                    if value == null:
+                        parameters["error"] = "Executer::do_execute_script::SET_VARIABLE, can not get variable: " + rvar_name
                         parameters["stop"] = true
                         break
 

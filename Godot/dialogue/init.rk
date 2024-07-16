@@ -4,11 +4,18 @@ character me "[color=blueviolet]Detective[/color]"
 character clues "Clue"
 clues.knows_band_name = 0
 clues.ghost_concert = 0
+clues.concert_info = 0
+clues.next_clue = 0
 
 # People
 character client "[color=aquamarine]Client[/color]"
+character client_no_name "[color=aquamarine]Friend?[/color]"
 client.name = "[color=aquamarine]Client[/color]"
 client.talked = 0
 client.fav_band = "Blood Party"
+client.talked_about_concert = 0
+client.talked_about_next_clue = 0
 
-character client_no_name "[color=aquamarine]Friend?[/color]"
+character clubguy "[color=springgreen]Club guy[/color]"
+clubguy.talked_about_band = 0
+clubguy.awkward = 0

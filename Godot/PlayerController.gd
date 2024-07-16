@@ -19,10 +19,12 @@ var layer_start = null
 var layer_acc = 0
 
 func _ready():
+    MusicHandler.play_music_track(MusicHandler.MUSIC_TRACK.sleuth)
     # DEBUG: if introduction was skipped, load character init file
     push_error("Ignore this error, it's caused by debug environment only:")
     if Rakugo.get_character("me") == {}:
         Rakugo.parse_and_execute_script("res://dialogue/init.rk")
+
 
 func _process(_delta):
     if interact_target != null and Input.is_action_just_pressed("interact"):

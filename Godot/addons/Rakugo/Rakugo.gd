@@ -111,10 +111,9 @@ func get_variable(var_name: String):
 
         2:
             return get_character_variable(vars_[0], vars_[1])
-
-    push_error("Rakugo does not knew a variable called: " + var_name)
-
-    return null
+        _:
+            push_error("Variables names can only have zero or one period: " + var_name)
+            return null
 
 
 # Return true if a global or character variable is founded with this name.

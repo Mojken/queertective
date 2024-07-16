@@ -21,6 +21,7 @@ func _on_execute_script_finished(script_name:String, _error_str:String):
     if character_name in script_name:
         talking = false
         Rakugo.sg_execute_script_finished.disconnect(_on_execute_script_finished)
+        Rakugo.sg_say.disconnect(_on_say)
         talk_delay = 1
         process_mode = Node.PROCESS_MODE_PAUSABLE
 

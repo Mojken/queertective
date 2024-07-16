@@ -13,18 +13,17 @@ extends AudioStreamPlayer
 
 
 enum MUSIC_TRACK {
-    example_music_track_1,
-    example_music_track_2,
+    sleuth
 }
 
 var music_tracks = {
-    MUSIC_TRACK.example_music_track_1: preload("res://music_and_sound/music/example_music_track_1.mp3"),
-    MUSIC_TRACK.example_music_track_2: preload("res://music_and_sound/music/example_music_track_2.mp3")
+    MUSIC_TRACK.sleuth: preload("res://music_and_sound/music/Sleuth Theme.mp3"),
 }
 
 func play_music_track(music_track):
     stream = music_tracks[music_track]
     play()
+
 
 
 # Fade volume can for example be used if music should fade out when switching scenes

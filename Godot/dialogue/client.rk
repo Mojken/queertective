@@ -40,10 +40,12 @@ partners:
     client "I've gotten used to keeping my relationships hidden by now, but the way my current partner handles it has really helped."
     me "So this current relationship is hidden as well?"
     client "Yeah. Like I said, I'm used to it, so it's not a problem. Unfortunately, it means I can't really say more than I already have."
-    "You get the sense there's more to find out here, but she's clearly not willing to divulge more. Maybe you can find a way to tease more out of her later, or maybe somebod else knows more?"
+    "You get the sense there's more to find out here, but she's clearly not willing to divulge more. Maybe you can find a way to tease more out of her later, or maybe somebody else knows more?"
     me "I get that. Sorry you had to get used to something like that, though. Hopefully that's something I can help with."
     client "Thanks, but I doubt it."
     me "You're still underestimating detectives! You'll see."
+    "Objective complete: Find a client"
+    "New objective: Figure out <client.name>'s sexuality"
 
     jump interrogation
 
@@ -72,7 +74,104 @@ ask_about_clues:
     client "Sure, ask away."
     menu ask_clues:
          "About what we initially talked about..." > interrogation
-         "I have found some clues I'd like to ask you about" > end
+         "I have found some clues I'd like to ask you about" > clue_branch
+
+    menu clue_branch:
+         "I'd like to discuss some new clues" > new_clues
+         "Could we go over some older clues again?" > old_clues
+
+new_clues:
+    client.old_or_new_clues = 1
+    jump clue_loop
+
+old_clues:
+    client.old_or_new_clues = 0
+    jump clue_loop
+
+clue_loop:
+    client.talked_about_clues = 0
+    jump concert_clue
+
+concert_clue:
+    # Skip if player hasn't found clue
+    jump next_clue if clues.concert_info == 0
+
+    # Skip if player has talked about clue and only wants to discuss new clues
+    client.skip_concert = client.talked_about_concert
+    client.skip_concert = client.old_or_new_clues
+    jump next_clue if client.skip_concert == 2
+
+    client.talked_about_concert = 1
+    client.talked_about_clues = 1
+
+    me "I heard <client.fav_band> is raising awareness for ghosts. I wasn't aware of the issue before this, but I'm really happy somebody is out there taking the first step."
+    client "Yeah! I was so happy when I heard that they were doing that! Ghost awareness is a serious issue but because of how hard it can be to reach out to ghosts, most people aren't even aware that there's a problem in the first place!"
+    client "It can be really hard to get people to care about it, but I think <client.fav_band> are in a position where they can actually make a huge difference."
+    me "What do you mean by "it's hard to reach out to ghosts"?"
+    client "Well, because of how they've been pushed aside, they're not here with us right now, right? You can't just go up to one and talk to them, you have to perform a seance."
+    client "Once you've gotten to know a ghost, it actually becomes really easy to get a hold of them — metaphorically, of course — but meeting new ghosts can be challenging. Most people probably don't even know how."
+    me "I sure don't. How did you come to find out?"
+    client "Oh, erm... Well, I've always been fascinated by ghosts, I guess?"
+    me "How so?"
+    client "..."
+    client "Well, you seem open-minded about this, so I suppose it's fine. I don't want to you telling others about this though, can you promise me that? I don't mind personally so much, but it's important to my partner."
+    me "I promise. A good detective excells at both finding and keeping secrets, and I'm the best detective you'll likely ever meet."
+    client "Okay, well, you see... I date ghosts."
+    me "Oh"
+    "Objective complete: Figure out <client.name>'s sexuality"
+    client "Always have. Somehow, people have just never interested me."
+    client "I thought I was somehow secretly a ghost myself, growing up. Possesed maybe?"
+    client "Now I just assume I'm broken in some way."
+    client "But you know what? My partner is great, I wouldn't want anybody else, and if I were normal we would have never met."
+    client "Dating the living is taboo among ghosts, so we have to keep it hidden. Heck, I'm not really so sure the living would take kindly to it either."
+    me "I can't speak for anyone else, but I don't see anything wrong with it."
+    me "I don't think you're broken."
+    me "In fact, I'm convinced there's plenty of people like you!"
+    "She looks at you with a strange expression in her eyes. You can't quite read it."
+    client "You don't think I would have met any by now?"
+    me "I mean, how many people have [i]you[/i] told?"
+    client "...I don't know, three? Counting you."
+    me "Then, statistically speaking, no. I don't think you would have met them. Or at least, if you have, you couldn't know. Maybe you're all individually assuming you're alone and broken, right next to each other."
+    client "It sounds really sad when you put it that way."
+    "You put a hand on her shoulder. Your eyes meet."
+    me "I intend to keep my promise. I'll find you your community. Thank you for sharing this with me, it's an honour."
+    "You pull away before it gets weird."
+    "New objective: Find <client.name> a community"
+
+    jump next_clue
+
+next_clue:
+    "This is as far as we got with this game! Thank you for playing this, short as it is, and we hope you come back in the future, when there's hopefully more!"
+
+    # Skip if player hasn't found clue
+    jump clue_loop_end if clues.next_clue == 0
+
+    # Skip if player has talked about clue and only wants to discuss new clues
+    client.skip_next_clue = client.talked_about_next_clue
+    client.skip_next_clue = client.old_or_new_clues
+    jump clue_loop_end if client.skip_next_clue == 2
+
+    client.talked_about_next_clue = 1
+    client.talked_about_clues = 1
+
+    "There isn't actually a clue here yet. I don't know how you managed to get here, but please let the devs know about it!"
+    "Give them this: <clues.next_clue><client.talked_about_next_clue><client.old_or_new_clues><client.skip_next_clue><clues.knows_band_name><clues.ghost_concert><clues.concert_info>"
+
+    jump clue_loop_end
+
+
+clue_loop_end:
+    jump no_clues if client.talked_about_clues == 0
+    me "That's all I wanted to talk about, thank you for your time!"
+    client "Okay. See you."
+    jump end
+
+no_clues:
+    me "Well, I haven't actually found any more clues yet..."
+    me "But I promise that I will!"
+    client "Okay. There's no rush, you know?"
+    me "I know. Thank you for your time!"
+    jump end
 
 wrapup:
     me "Okay, I think I've got enough for now, thank you for your time. I'll swing by again if I have any more questions."

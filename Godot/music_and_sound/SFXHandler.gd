@@ -38,7 +38,7 @@ func play_sound_effect(sound_effect, pitch = 1.0):
     var new_pitch = pitch
     if current_stream != new_stream or current_pitch != new_pitch:
         set_new_active_audio_stream_player(new_stream, new_pitch)
-                                    
+
     audio_stream_players[current_audio_stream_player_index].play()
 
 
@@ -47,7 +47,7 @@ func set_new_active_audio_stream_player(stream, pitch):
         current_audio_stream_player_index = 0
     else:
         current_audio_stream_player_index += 1
-                                    
+
     audio_stream_players[current_audio_stream_player_index].stream = stream
     audio_stream_players[current_audio_stream_player_index].pitch_scale = pitch
 
@@ -61,7 +61,7 @@ func set_volume(new_volume): # 0.0 - 1.0 where 0.5 = default volume, 0.0 = muted
     # However... it would be nice if the default volume was in the middle of a volume slider and you could also linearly increase the volume.
     # +10dB would be perceived as double volume so then the input parameters to linear_to_db() would have to be between 0.0 and 3.16.
     # Add some math to convert things so 0.5 becomes default. 0.0 becomes -100% and 1.0 becomes +100%
-    
+
     if new_volume == 0.5:
         new_volume = 1.0
     elif new_volume > 0.5:
@@ -72,8 +72,8 @@ func set_volume(new_volume): # 0.0 - 1.0 where 0.5 = default volume, 0.0 = muted
 
     for audio_stream_player in audio_stream_players:
         audio_stream_player.volume_db = linear_to_db(new_volume)
-                                                                
-                                                                
+
+
 func get_volume():
     var linear_volume = db_to_linear(audio_stream_players[0].volume_db)
     if linear_volume == 1.0:
@@ -83,8 +83,8 @@ func get_volume():
         return 0.5 + (0.5 * percent)
     elif linear_volume < 1.0:
         return linear_volume * 0.5
-                                                                
-                                
+
+
 
 # TEST
 #func _physics_process(delta):

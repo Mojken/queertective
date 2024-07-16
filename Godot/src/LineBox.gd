@@ -2,8 +2,6 @@ class_name LineBox
 extends Control
 
 @export var label : RichTextLabel
-@export var before : Control
-@export var after : Control
 @export var line = ""
 var next_prompt : Button
 var character = ""
@@ -29,11 +27,9 @@ func rush():
 func _ready():
     if character != null:
         if character == "Me":
-            #before.visible = true
-            label.text = "\n[b]" + character + "[/b]\n"
+            label.text = "[b]" + character + "[/b]\n"
         else:
-            #after.visible = true
-            label.text = "\n[b]" + character + "[/b]\n"
+            label.text = "[b]" + character + "[/b]\n"
     else:
         label.text = "[i]"
 

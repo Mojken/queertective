@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://duevkcs6lgjb8"]
+[gd_scene load_steps=29 format=3 uid="uid://duevkcs6lgjb8"]
 
 [ext_resource type="Texture2D" uid="uid://cydkf7j58kaln" path="res://graphics/background_sky.png" id="1_c6ey5"]
 [ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://player.tscn" id="1_i4pft"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bysstn8468ju0" path="res://graphics/npc1.png" id="3_2wroo"]
 [ext_resource type="Material" uid="uid://b3me7ruqiqg8q" path="res://floor_material.tres" id="3_mmqj1"]
 [ext_resource type="PackedScene" uid="uid://ntmuwwp42ttp" path="res://dialogue_box.tscn" id="4_qumot"]
+[ext_resource type="Texture2D" uid="uid://dkkmafa8ll68h" path="res://graphics/npc3.png" id="6_i6ufx"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jqtjw"]
 panorama = ExtResource("1_c6ey5")
@@ -388,6 +389,29 @@ texture_filter = 2
 texture = ExtResource("3_2wroo")
 
 [node name="Marker" type="Node3D" parent="Level/Client"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.464036, -0.476155, 0.14658)
+
+[node name="ClubGuy" type="CharacterBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.73388, 0.509446, -4.89663)
+collision_layer = 2
+script = ExtResource("2_42c1c")
+character_name = "clubguy"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/ClubGuy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -0.0529062, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Level/ClubGuy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.053, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="Sprite3D" type="Sprite3D" parent="Level/ClubGuy"]
+sorting_offset = 0.1
+pixel_size = 0.004
+texture_filter = 2
+texture = ExtResource("6_i6ufx")
+
+[node name="Marker" type="Node3D" parent="Level/ClubGuy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.464036, -0.476155, 0.14658)
 
 [node name="Poster" type="CharacterBody3D" parent="Level"]
