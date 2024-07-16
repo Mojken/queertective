@@ -28,26 +28,21 @@ first_chat:
 
 partners:
     me "What can you tell me about your current or previous partners?"
-    client "I'm not sure how much there is to say."
-    client "I haven't really dated a whole lot of people, but I guess it's fair to say that they were all older than me."
-    client "Not in a problematic way, of course."
-    client "Or, well, it's a bit complicated I guess, and not all of the relationships were maybe all that healthy, but my current one really is."
-    "You get the sense she really loves her partner."
-
-    me "If you don't mind me asking, how much older are we talking?"
-    client "It's varied quite a lot. They were all people I could vibe with though, I wouldn't date someone that feels like they could be my parent."
-
+    client "I'm not sure what there is to say."
     me "Alright. Do you have a gender preference?"
     client "Hmm... Not really, I guess. Or at least, that's not the important part, for me."
-
-    me "You said some of the relationships were unhealthy, what did you mean?"
-    client "This is obviously pretty personal stuff, but basically some of them felt awkward about dating me, thought their peers wouldn't approve, and they sometimes handled that really poorly."
+    client "I maybe go more off of vibes? I think it's fair to say I have a type."
+    client "It's a bit hard to explain what that type is though."
+    me "Would you say you have a healthy dating life?"
+    client "Recently, I would say so. In the past, no."
+    me "How so?"
+    client "This is obviously pretty personal stuff, but basically some of them felt awkward about dating me — thought their peers wouldn't approve — and they sometimes handled that really poorly."
     client "I've gotten used to keeping my relationships hidden by now, but the way my current partner handles it has really helped."
-    me "So you've been keeping this relationship quiet as well?"
-    client "Yeah. Like I said, I'm used to it, so it's not a problem. Unfortunately, I can't tell you much more about this."
-    "This part seems relevant, but she won't talk about it with just anybody. Maybe you can find a way to coax it out of her later, or maybe even ask her partner."
+    me "So this current relationship is hidden as well?"
+    client "Yeah. Like I said, I'm used to it, so it's not a problem. Unfortunately, it means I can't really say more than I already have."
+    "You get the sense there's more to find out here, but she's clearly not willing to divulge more. Maybe you can find a way to tease more out of her later, or maybe somebod else knows more?"
     me "I get that. Sorry you had to get used to something like that, though. Hopefully that's something I can help with."
-    client "I doubt it."
+    client "Thanks, but I doubt it."
     me "You're still underestimating detectives! You'll see."
 
     jump interrogation
