@@ -39,6 +39,14 @@ movie_writer/fps=24
 
 enabled=PackedStringArray("res://addons/Rakugo/plugin.cfg", "res://addons/godot-vim/plugin.cfg")
 
+[importer_defaults]
+
+texture={
+"compress/mode": 3,
+"detect_3d/compress_to": 0,
+"mipmaps/generate": true
+}
+
 [input]
 
 left={
