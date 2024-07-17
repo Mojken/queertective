@@ -30,9 +30,10 @@ func spawn_line_box(charname, line):
     return box
 
 func next():
-    if !last_linebox.finished:
+    if last_linebox and !last_linebox.finished:
         last_linebox.rush()
     elif Rakugo.is_waiting_step():
+        last_linebox.set_physics_process(false)
         Rakugo.do_step()
 
 func auto_scroll():
@@ -78,16 +79,26 @@ func _on_charvar_changed(character_tag:String, var_name:String, value:Variant):
 
     if len(character_tag) > 0:
         character_tag += "."
-    print(character_tag, var_name, " changed to ", value)
 
 func _on_var_changed(var_name:String, value:Variant):
     _on_charvar_changed("", var_name, value)
 
+var skip_timer = -1
+func _process(delta):
+    if skip_timer >= 0 and Input.is_action_pressed("interact"):
+        skip_timer += delta
+    if skip_timer > 0.5:
+        if last_linebox and !last_linebox.finished:
+            last_linebox.skip()
+        else:
+            next()
+        skip_timer = -1
+
 func _gui_input(event):
-    if event is InputEventMouseButton:
-        if event.button_index == 1 and event.pressed:
+    if event.is_action("interact"):
+        if event.pressed:
+            skip_timer = 0
+        elif skip_timer > 0 and skip_timer < 0.5:
             next()
-    elif event is InputEventKey:
-        if event.is_action("interact") and event.pressed and not event.echo:
-            next()
-            get_viewport().set_input_as_handled()
+            skip_timer = -1
+

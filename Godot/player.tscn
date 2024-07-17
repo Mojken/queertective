@@ -12,7 +12,7 @@ dof_blur_far_distance = 5.06
 dof_blur_amount = 0.23
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ty51"]
-size = Vector3(0.713245, 1.17569, 1.40726)
+size = Vector3(1.10802, 0.973465, 1.08595)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_w5v1q"]
 viewport_path = NodePath("InteractPrompt/SubViewport")
@@ -84,17 +84,16 @@ func _process(_delta):
 "
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("interact_prompt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492541, 0.701067)
 collision_layer = 0
 script = ExtResource("1_2o5tx")
 interact_prompt = NodePath("InteractPrompt/SubViewport/DirectionIndicator5")
 
 [node name="CollisionShape2D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.0616731, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.405, 0)
 shape = SubResource("CapsuleShape3D_0kij2")
 
 [node name="CollisionShape2D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.0616731, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.405, 0)
 shape = SubResource("CapsuleShape3D_0kij2")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -107,6 +106,7 @@ frustum_offset = Vector2(0, 0.1)
 near = 0.343
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0.456838, 0.000999987)
 sorting_offset = 0.1
 pixel_size = 0.004
 texture_filter = 2
@@ -114,16 +114,17 @@ sprite_frames = ExtResource("2_51y5f")
 animation = &"idle"
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102099, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.102099, -0.437068)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.47359e-06, 0.38734, 0.160653)
 shape = SubResource("BoxShape3D_2ty51")
 
 [node name="InteractPrompt" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619596, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994783, 0)
 pixel_size = 0.002
 texture = SubResource("ViewportTexture_w5v1q")
 

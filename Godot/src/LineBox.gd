@@ -23,13 +23,15 @@ func add_line(new_line):
 func rush():
     timer -= 25
 
-func full_rush():
+func skip():
     if counter == 0:
         label.text += line
     else:
         label.text += line.substr(counter)
     counter = len(line)
     finished = true
+    SfxHandler.play_sound_effect(SfxHandler.SOUND_EFFECT.typewriter_bell, 1.0, 1.68)
+    timer = 2.43 - 1.68 - 0.1 # end of sound - start of sound - adjustment
 
 func _ready():
     if character != null:
@@ -56,6 +58,7 @@ func _physics_process(delta):
 
     if timer > 0:
         timer -= delta * speed
+        sound_timer += delta * speed
     else:
         var skip_sound = false
         var char = ""
@@ -67,28 +70,20 @@ func _physics_process(delta):
                 match char:
                     ".":
                         timer += 6
-                        sound_timer += 6
                     "!":
                         timer += 6
-                        sound_timer += 6
                     "?":
                         timer += 6
-                        sound_timer += 6
                     ";":
                         timer += 6
-                        sound_timer += 6
                     ",":
                         timer += 3
-                        sound_timer += 3
                     "—":
                         timer += 4
-                        sound_timer += 4
                     "\n":
                         timer += 0
-                        sound_timer += 0
                     " ":
                         timer += 1.5
-                        sound_timer += 1.5
                         if Settings.settings.get(Settings.SETTING.text_speed) <= 40:
                             skip_sound = true
                     "[":
@@ -100,14 +95,12 @@ func _physics_process(delta):
                         if Settings.settings.get(Settings.SETTING.text_speed) > 40:
                             continue
                         timer += 1
-                        sound_timer += 1
             if counter >= len(line):
                 SfxHandler.play_sound_effect(SfxHandler.SOUND_EFFECT.typewriter_bell, 1.0, 1.68)
                 finished = true
                 timer = 2.43 - 1.68 - 0.1 # end of sound - start of sound - adjustment
                 return
 
-        print(sound_timer)
         if !skip_sound and sound_timer >= 0.08 * speed:
             SfxHandler.play_sound_effect([
                 SfxHandler.SOUND_EFFECT.type1,

@@ -26,3 +26,8 @@ func on_pressed():
     for child in choices:
         remove_child(child)
     choices = []
+
+
+func _on_next_prompt_visibility_changed():
+    if next_prompt and next_prompt.visible and len(choices) > 0:
+        next_prompt.visible = false
