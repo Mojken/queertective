@@ -1,5 +1,7 @@
 extends Control
 
+signal sig_closed
+
 @export var linebox : LineBox
 @export var volume_slider : HSlider
 @export var SFXvolume_slider : HSlider
@@ -8,8 +10,6 @@ extends Control
 @export var close_button : Button
 
 func _ready():
-    MusicHandler.play_music_track(MusicHandler.MUSIC_TRACK.sleuth)
-
     volume_slider.value_changed.connect(volume_changed)
     volume_changed(volume_slider.value)
     SFXvolume_slider.value_changed.connect(SFXvolume_changed)
@@ -22,7 +22,7 @@ func _ready():
     close_button.pressed.connect(close)
 
     linebox.sig_finished.connect(repeat_text)
-    repeat_text()
+    close()
 
 func volume_changed(new_value):
     Settings.settings[Settings.SETTING.volume] = new_value
@@ -43,13 +43,20 @@ func size_changed(new_value):
     self.theme.set_font_size("italics_font_size", "DialogueLabel", new_value)
 
 func close():
-    $Panel.visible = false
+    visible = false
+    linebox.set_physics_process(false)
+    sig_closed.emit()
+
+func open():
+    visible = true
+    linebox.set_physics_process(true)
+    repeat_text()
 
 func repeat_text():
     print(linebox.debug_sound_counter)
     linebox.debug_sound_counter = 0
     linebox.label.text = "[b]Example:[/b]\n"
-    linebox.line = "aaaa bbbb cccc dddd eeee ffff \nabcdef abcdef abcdef abcdef \nThe quick brown fox jumps over the lazy dog "
+    linebox.line = "The quick brown fox jumps over the lazy dog "
     linebox.finished = false
     linebox.timer = 0
     linebox.counter = 0

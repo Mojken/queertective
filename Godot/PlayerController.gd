@@ -20,6 +20,7 @@ var layer_acc = 0
 
 func _ready():
     MusicHandler.play_music_track(MusicHandler.MUSIC_TRACK.outside)
+    Rakugo.sg_character_variable_changed.connect($"../UI/DialogueBox"._on_charvar_changed)
     # DEBUG: if introduction was skipped, load character init file
     push_error("Ignore this error, it's caused by debug environment only:")
     if Rakugo.get_character("me") == {}:
@@ -29,6 +30,7 @@ func _ready():
 func _process(_delta):
     if interact_target != null and Input.is_action_just_pressed("interact"):
         if interact_target is Chatable:
+            get_viewport().set_input_as_handled()
             interact_target.chat()
             interact_prompt.visible = false
 

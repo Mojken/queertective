@@ -2,6 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://d2girha0jxcu5" path="res://graphics/dialogue_ui_background.png" id="1_6s111"]
 
+[sub_resource type="SystemFont" id="SystemFont_hdrjr"]
+font_names = PackedStringArray("FreeMono")
+font_weight = 500
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s8b3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys0ux"]
@@ -55,10 +59,6 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.3408, 0.67308, 0.71, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_hdrjr"]
-font_names = PackedStringArray("FreeMono")
-font_weight = 500
-
 [resource]
 default_font = SubResource("SystemFont_hdrjr")
 DialogueBox/base_type = &"MarginContainer"
@@ -67,6 +67,7 @@ DialogueBox/constants/margin_left = 34
 DialogueBox/constants/margin_right = 34
 DialogueBox/constants/margin_top = 7
 DialogueChoiceButton/base_type = &"Button"
+DialogueChoiceButton/fonts/font = SubResource("SystemFont_hdrjr")
 DialogueChoiceButton/styles/focus = SubResource("StyleBoxEmpty_8s8b3")
 DialogueChoiceButton/styles/hover = SubResource("StyleBoxFlat_ys0ux")
 DialogueChoiceButton/styles/normal = SubResource("StyleBoxFlat_bolvf")

@@ -3,6 +3,7 @@ extends Control
 var main_scene = preload("res://world_scene.tscn")
 
 func _ready():
+    MusicHandler.play_music_track(MusicHandler.MUSIC_TRACK.sleuth)
     if main_scene == null:
         push_error("Failed to load main scene")
     Rakugo.parse_and_execute_script("res://dialogue/init.rk")

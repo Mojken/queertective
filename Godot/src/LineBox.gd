@@ -21,6 +21,9 @@ func add_line(new_line):
     set_physics_process(true)
 
 func rush():
+    timer -= 25
+
+func full_rush():
     if counter == 0:
         label.text += line
     else:
@@ -37,7 +40,7 @@ func _ready():
     if next_prompt:
         next_prompt.visible = false
 
-func _process(delta):
+func _physics_process(delta):
     if finished:
         set_physics_process(false)
         if next_prompt:

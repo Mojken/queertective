@@ -23,8 +23,8 @@ func spawn_line_box(charname, line):
 
     last_linebox = box
     history_panel.add_child(box)
-    if charname == null:
-        box.rush()
+    #if charname == null:
+    #    box.rush()
 
     history.append(line)
     return box
@@ -45,7 +45,6 @@ func _ready():
     Rakugo.sg_say.connect(_on_say)
     Rakugo.sg_menu.connect(_on_menu)
     Rakugo.sg_variable_changed.connect(_on_var_changed)
-    Rakugo.sg_character_variable_changed.connect(_on_charvar_changed)
     Rakugo.sg_execute_script_finished.connect(_on_execute_script_finished)
     scroll_container.get_v_scroll_bar().changed.connect(auto_scroll)
 
@@ -91,3 +90,4 @@ func _gui_input(event):
     elif event is InputEventKey:
         if event.is_action("interact") and event.pressed and not event.echo:
             next()
+            get_viewport().set_input_as_handled()

@@ -1,11 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://db78j4h3hx3oe"]
+[gd_scene load_steps=9 format=3 uid="uid://db78j4h3hx3oe"]
 
 [ext_resource type="Script" path="res://Introduction.gd" id="1_6v3j7"]
 [ext_resource type="PackedScene" uid="uid://ntmuwwp42ttp" path="res://dialogue_box.tscn" id="2_aeoou"]
 [ext_resource type="Texture2D" uid="uid://dqkfjxpvhkv0t" path="res://graphics/char_standing.png" id="3_ammli"]
+[ext_resource type="PackedScene" uid="uid://dqv5rnke210tn" path="res://settings_menu.tscn" id="3_pngqa"]
+[ext_resource type="Theme" uid="uid://bqncvfcv4b46v" path="res://theme.tres" id="4_eyagm"]
+[ext_resource type="Texture2D" uid="uid://cje7pi0tklk65" path="res://graphics/settings.png" id="5_os8ue"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lye0t"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_q16j7"]
+script/source = "extends Button
+
+@export var menu : Container
+@export var top_padding : Control
+@export var side_container : Container
+@export var centre_padding : Control
+
+func _ready():
+    menu.sig_closed.connect(on_menu_closed)
+
+func _on_pressed():
+    menu.open()
+    centre_padding.size_flags_stretch_ratio = 1 # 2 - 0.15
+    side_container.size_flags_stretch_ratio = 1 # 0.15
+    visible = false
+
+func on_menu_closed():
+    centre_padding.size_flags_stretch_ratio = 2 - 0.15
+    side_container.size_flags_stretch_ratio = 0.15
+    visible = true
+"
 
 [node name="Introduction" type="Control"]
 layout_mode = 3
@@ -53,10 +79,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Settings" type="VBoxContainer" parent="DialogueUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="Control" type="Control" parent="DialogueUI/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
+mouse_filter = 2
+
+[node name="SettingsMenu" parent="DialogueUI/Settings" instance=ExtResource("3_pngqa")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
+
+[node name="TextureButton" type="Button" parent="DialogueUI/Settings" node_paths=PackedStringArray("menu", "top_padding", "side_container", "centre_padding")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_eyagm")
+theme_type_variation = &"DialogueChoiceButton"
+theme_override_font_sizes/font_size = 50
+icon = ExtResource("5_os8ue")
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_q16j7")
+menu = NodePath("../SettingsMenu")
+top_padding = NodePath("../Control")
+side_container = NodePath("..")
+centre_padding = NodePath("../../Control")
+
 [node name="Control" type="Control" parent="DialogueUI"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 1.85
 
 [node name="DialogueBox" parent="DialogueUI" instance=ExtResource("2_aeoou")]
 layout_mode = 2
+
+[connection signal="pressed" from="DialogueUI/Settings/TextureButton" to="DialogueUI/Settings/TextureButton" method="_on_pressed"]
