@@ -24,11 +24,27 @@ var current_audio_stream_player_index = 0
 enum SOUND_EFFECT {
     example_sound_effect_1,
     example_sound_effect_2,
+    type1,
+    type2,
+    type3,
+    type4,
+    type5,
+    type6,
+    curious,
+    eureka,
 }
 
 var sound_effects = {
     SOUND_EFFECT.example_sound_effect_1: preload("res://music_and_sound/sound_effects/example_sound_effect_1.mp3"),
-    SOUND_EFFECT.example_sound_effect_2: preload("res://music_and_sound/sound_effects/example_sound_effect_2.mp3")
+    SOUND_EFFECT.example_sound_effect_2: preload("res://music_and_sound/sound_effects/example_sound_effect_2.mp3"),
+    SOUND_EFFECT.type1: preload("res://music_and_sound/sound_effects/typewriter_sounds/type1.mp3"),
+    SOUND_EFFECT.type2: preload("res://music_and_sound/sound_effects/typewriter_sounds/type2.mp3"),
+    SOUND_EFFECT.type3: preload("res://music_and_sound/sound_effects/typewriter_sounds/type3.mp3"),
+    SOUND_EFFECT.type4: preload("res://music_and_sound/sound_effects/typewriter_sounds/type4.mp3"),
+    SOUND_EFFECT.type5: preload("res://music_and_sound/sound_effects/typewriter_sounds/type5.mp3"),
+    SOUND_EFFECT.type6: preload("res://music_and_sound/sound_effects/typewriter_sounds/type6.mp3"),
+    SOUND_EFFECT.curious: preload("res://music_and_sound/sound_effects/Curious.mp3"),
+    SOUND_EFFECT.eureka: preload("res://music_and_sound/sound_effects/Eureka.mp3"),
 }
 
 func play_sound_effect(sound_effect, pitch = 1.0):

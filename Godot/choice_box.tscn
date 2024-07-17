@@ -1,59 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://02gh3u6lxcay"]
+[gd_scene load_steps=4 format=3 uid="uid://02gh3u6lxcay"]
 
 [ext_resource type="Script" path="res://src/ChoiceBox.gd" id="1_ku76v"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1vg3"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 50.0
-content_margin_bottom = 10.0
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bolvf"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys0ux"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.072, 0.193333, 0.8, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s8b3"]
+[ext_resource type="Texture2D" uid="uid://mwkhprla0ae8" path="res://graphics/arrow.png" id="2_6ywhe"]
+[ext_resource type="Theme" uid="uid://bqncvfcv4b46v" path="res://theme.tres" id="3_2j8l1"]
 
 [node name="ChoiceBox" type="VBoxContainer"]
-offset_right = 8.0
-offset_bottom = 8.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_ku76v")
 
-[node name="NextPrompt" type="Button" parent="."]
-visible = false
+[node name="NextPrompt" type="HBoxContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_k1vg3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_k1vg3")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_k1vg3")
-theme_override_styles/focus = SubResource("StyleBoxFlat_k1vg3")
-text = "⇒"
 alignment = 2
+
+[node name="Control" type="Control" parent="NextPrompt"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="NextPrompt"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_6ywhe")
 
 [node name="Choice" type="Button" parent="."]
 visible = false
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_bolvf")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ys0ux")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ys0ux")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_8s8b3")
+theme = ExtResource("3_2j8l1")
+theme_type_variation = &"DialogueChoiceButton"
 toggle_mode = true
 alignment = 0

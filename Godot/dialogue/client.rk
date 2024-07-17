@@ -5,12 +5,13 @@ jump ask_about_clues if client.talked == 1
 first_chat:
     client.talked = 1
     me "Hey, how are you doing, friend?"
-    client_no_name "Oh, Hi. I'm not doing so bad."
+    client "Oh, Hi. I'm not doing so bad."
     me "Let me guess, there's nothing you need help with, right? No mysteries to solve or so?"
-    client_no_name "... No?"
+    client "... No?"
     me "That checks out. I'm a detective, you see, but that's not really been going too well. No clients. Name's Queertective."
     "You shake hands"
-    client_no_name "<client.name>"
+    client.name = "[color=#6ADCF3]Giselle[/color]"
+    client "<client.fullname>"
     me "Pleasure. Say — and I apologise if I'm overstepping boundaries here — did you know that whatever your sexuality and identity is, you're not alone in feeling that way?"
     client "That's cute, but you're being naive."
     me "Not at all! In fact, let me prove it to you! I'll use my detective skills to find you your community!"

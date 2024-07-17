@@ -13,11 +13,13 @@ extends AudioStreamPlayer
 
 
 enum MUSIC_TRACK {
-    sleuth
+    sleuth,
+    outside,
 }
 
 var music_tracks = {
     MUSIC_TRACK.sleuth: preload("res://music_and_sound/music/Sleuth Theme.mp3"),
+    MUSIC_TRACK.outside: preload("res://music_and_sound/music/Queertective-Outside.mp3"),
 }
 
 func play_music_track(music_track):

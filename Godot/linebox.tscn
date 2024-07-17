@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cn7gg65xvd80e"]
+[gd_scene load_steps=3 format=3 uid="uid://cn7gg65xvd80e"]
 
 [ext_resource type="Script" path="res://src/LineBox.gd" id="1_exc1p"]
+[ext_resource type="Theme" uid="uid://bqncvfcv4b46v" path="res://theme.tres" id="2_saoue"]
 
 [node name="LineBox" type="VBoxContainer" node_paths=PackedStringArray("label")]
 anchors_preset = 15
@@ -13,6 +14,7 @@ script = ExtResource("1_exc1p")
 label = NodePath("Label")
 
 [node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -21,11 +23,9 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 5.0
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 19
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 18
+theme = ExtResource("2_saoue")
+theme_type_variation = &"DialogueLabel"
 bbcode_enabled = true
 fit_content = true
 scroll_active = false

@@ -1,4 +1,4 @@
-character me "[color=blueviolet]Detective[/color]"
+character me "[color=#B883FF]Detective[/color]"
 
 # Fake character to trigger clue handling. Consider replacing with custom regex thingy.
 character clues "Clue"
@@ -8,14 +8,13 @@ clues.concert_info = 0
 clues.next_clue = 0
 
 # People
-character client "[color=aquamarine]Client[/color]"
-character client_no_name "[color=aquamarine]Friend?[/color]"
-client.name = "[color=aquamarine]Client[/color]"
+character client "[color=#6ADCF3]Friend?[/color]"
+client.fullname = "[color=#6ADCF3]Giselle Serenade[/color]"
 client.talked = 0
-client.fav_band = "Blood Party"
+client.fav_band = "Midnightbloom"
 client.talked_about_concert = 0
 client.talked_about_next_clue = 0
 
-character clubguy "[color=springgreen]Club guy[/color]"
+character clubguy "[color=#25DD7A]Ziggy Shade[/color]"
 clubguy.talked_about_band = 0
 clubguy.awkward = 0

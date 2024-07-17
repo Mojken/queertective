@@ -14,7 +14,7 @@ func spawn_line_box(charname, line):
         last_linebox.add_line(line)
         history[-1] = last_linebox.line
         return last_linebox
-    last_char = charname
+    #last_char = charname
 
     var box = line_box.instantiate()
     box.line = line
@@ -70,7 +70,8 @@ func _on_execute_script_finished(_script_name:String, _error_str:String):
 
 func _on_charvar_changed(character_tag:String, var_name:String, value:Variant):
     if character_tag == "clues":
-        spawn_line_box(null, "\n───── Clue found! ─────")
+        spawn_line_box(null, "───── Clue found! ─────")
+        SfxHandler.play_sound_effect(SfxHandler.SOUND_EFFECT.eureka)
     else:
         match var_name:
             "appointments":

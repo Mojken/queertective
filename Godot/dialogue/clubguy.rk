@@ -4,6 +4,7 @@ jump concert_init if clues.ghost_concert == 1
 jump hellobye
 
 hellobye:
+    "This is <clubguy.name>. You know them as the owner of this club."
     me "Hello."
     clubguy "Hi."
     me "..."
@@ -29,7 +30,8 @@ awkward_concert:
     jump concert
 
 concert_init:
-    me "Hello. I have some questions about the <client.fav_band> concert. Are you the right person to talk to?"
+    "This is <clubguy.name>. You know them as the owner of this club."
+    me "Hello. I have some questions about the <client.fav_band> concert."
     clubguy "I am! What do you want to know?"
     me "Well, what can you tell me about it?"
     jump concert

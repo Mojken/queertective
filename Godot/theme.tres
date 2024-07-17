@@ -1,0 +1,89 @@
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bqncvfcv4b46v"]
+
+[ext_resource type="Texture2D" uid="uid://d2girha0jxcu5" path="res://graphics/dialogue_ui_background.png" id="1_6s111"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s8b3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys0ux"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.415686, 0.862745, 0.952941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bolvf"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+draw_center = false
+
+[sub_resource type="SystemFont" id="SystemFont_f0ayr"]
+font_names = PackedStringArray("FreeMono")
+font_weight = 850
+
+[sub_resource type="SystemFont" id="SystemFont_b78p7"]
+font_names = PackedStringArray("FreeMono")
+font_italic = true
+font_stretch = 75
+
+[sub_resource type="SystemFont" id="SystemFont_0t716"]
+font_names = PackedStringArray("FreeMono")
+font_weight = 500
+font_stretch = 75
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pbm5p"]
+texture = ExtResource("1_6s111")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4sev"]
+bg_color = Color(0.415686, 0.862745, 0.952941, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_poln8"]
+bg_color = Color(0, 0, 0, 0.321569)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3408, 0.67308, 0.71, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_hdrjr"]
+font_names = PackedStringArray("FreeMono")
+font_weight = 500
+
+[resource]
+default_font = SubResource("SystemFont_hdrjr")
+DialogueBox/base_type = &"MarginContainer"
+DialogueBox/constants/margin_bottom = 30
+DialogueBox/constants/margin_left = 34
+DialogueBox/constants/margin_right = 34
+DialogueBox/constants/margin_top = 7
+DialogueChoiceButton/base_type = &"Button"
+DialogueChoiceButton/styles/focus = SubResource("StyleBoxEmpty_8s8b3")
+DialogueChoiceButton/styles/hover = SubResource("StyleBoxFlat_ys0ux")
+DialogueChoiceButton/styles/normal = SubResource("StyleBoxFlat_bolvf")
+DialogueChoiceButton/styles/pressed = SubResource("StyleBoxFlat_ys0ux")
+DialogueLabel/base_type = &"RichTextLabel"
+DialogueLabel/font_sizes/bold_font_size = 22
+DialogueLabel/font_sizes/italics_font_size = 20
+DialogueLabel/font_sizes/normal_font_size = 20
+DialogueLabel/fonts/bold_font = SubResource("SystemFont_f0ayr")
+DialogueLabel/fonts/italics_font = SubResource("SystemFont_b78p7")
+DialogueLabel/fonts/normal_font = SubResource("SystemFont_0t716")
+DialoguePanel/base_type = &"Panel"
+DialoguePanel/styles/panel = SubResource("StyleBoxTexture_pbm5p")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_t4sev")
+HSlider/styles/slider = null
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+Panel/styles/panel = SubResource("StyleBoxFlat_poln8")

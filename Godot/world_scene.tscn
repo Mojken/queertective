@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://duevkcs6lgjb8"]
+[gd_scene load_steps=30 format=3 uid="uid://duevkcs6lgjb8"]
 
 [ext_resource type="Texture2D" uid="uid://cydkf7j58kaln" path="res://graphics/background_sky.png" id="1_c6ey5"]
 [ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://player.tscn" id="1_i4pft"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://b3me7ruqiqg8q" path="res://floor_material.tres" id="3_mmqj1"]
 [ext_resource type="PackedScene" uid="uid://ntmuwwp42ttp" path="res://dialogue_box.tscn" id="4_qumot"]
 [ext_resource type="Texture2D" uid="uid://dkkmafa8ll68h" path="res://graphics/npc3.png" id="6_i6ufx"]
+[ext_resource type="Texture2D" uid="uid://b51rb4b2n7xmn" path="res://graphics/posters.png" id="7_p0hix"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jqtjw"]
 panorama = ExtResource("1_c6ey5")
@@ -421,27 +422,17 @@ collision_mask = 0
 script = ExtResource("2_42c1c")
 character_name = "poster"
 
-[node name="Label" type="Label3D" parent="Level/Poster"]
-transform = Transform3D(0.8457, 0.533659, 0, -0.533659, 0.8457, 0, 0, 0, 1, 2.11543, 0.905972, 0)
-text = "Posters
-"
-
-[node name="Label2" type="Label3D" parent="Level/Poster"]
-transform = Transform3D(0.976785, -0.214224, 0, 0.214224, 0.976785, 0, 0, 0, 1, 2.11543, 0.679108, 0)
-text = "Posters
-"
-
-[node name="Label3" type="Label3D" parent="Level/Poster"]
-transform = Transform3D(0.370801, -0.928713, 0, 0.928713, 0.370801, 0, 0, 0, 1, 2.11543, 1.23242, 0)
-text = "Posters
-"
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Poster"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11175, 0.89564, -0.00557619)
 shape = SubResource("BoxShape3D_0u77j")
 
 [node name="Marker" type="Node3D" parent="Level/Poster"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0835, 0, 0.218765)
+
+[node name="Sprite3D" type="Sprite3D" parent="Level/Poster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0179, 0.749517, 0)
+pixel_size = 0.004
+texture = ExtResource("7_p0hix")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44395, 0.63532)

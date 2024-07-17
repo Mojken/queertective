@@ -19,7 +19,7 @@ var layer_start = null
 var layer_acc = 0
 
 func _ready():
-    MusicHandler.play_music_track(MusicHandler.MUSIC_TRACK.sleuth)
+    MusicHandler.play_music_track(MusicHandler.MUSIC_TRACK.outside)
     # DEBUG: if introduction was skipped, load character init file
     push_error("Ignore this error, it's caused by debug environment only:")
     if Rakugo.get_character("me") == {}:

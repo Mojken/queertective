@@ -45,7 +45,7 @@ size_flags_stretch_ratio = 8.0
 texture = ExtResource("3_ammli")
 stretch_mode = 5
 
-[node name="UI" type="HBoxContainer" parent="."]
+[node name="DialogueUI" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,10 +53,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="UI"]
+[node name="Control" type="Control" parent="DialogueUI"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="DialogueBox" parent="UI" instance=ExtResource("2_aeoou")]
+[node name="DialogueBox" parent="DialogueUI" instance=ExtResource("2_aeoou")]
 layout_mode = 2

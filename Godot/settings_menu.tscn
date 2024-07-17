@@ -1,0 +1,113 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqv5rnke210tn"]
+
+[ext_resource type="Theme" uid="uid://bqncvfcv4b46v" path="res://theme.tres" id="1_ryw3n"]
+[ext_resource type="Script" path="res://settings_menu.gd" id="2_0hmcd"]
+[ext_resource type="PackedScene" uid="uid://cn7gg65xvd80e" path="res://linebox.tscn" id="3_m2uc2"]
+
+[node name="SettingsMenu" type="MarginContainer" node_paths=PackedStringArray("linebox", "volume_slider", "SFXvolume_slider", "size_slider", "speed_slider", "close_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ryw3n")
+script = ExtResource("2_0hmcd")
+linebox = NodePath("Panel/MarginContainer/VBoxContainer/LineBox")
+volume_slider = NodePath("Panel/MarginContainer/VBoxContainer/VolumeSlider")
+SFXvolume_slider = NodePath("Panel/MarginContainer/VBoxContainer/SFXVolumeSlider")
+size_slider = NodePath("Panel/MarginContainer/VBoxContainer/TextSizeSlider")
+speed_slider = NodePath("Panel/MarginContainer/VBoxContainer/TextSpeedSlider")
+close_button = NodePath("Panel/MarginContainer/VBoxContainer/Button")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ryw3n")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ryw3n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_ryw3n")
+
+[node name="VolumeLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("1_ryw3n")
+text = "Music volume"
+vertical_alignment = 2
+
+[node name="VolumeSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_ryw3n")
+max_value = 1.0
+step = 0.01
+value = 0.4
+
+[node name="SFXVolumeLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("1_ryw3n")
+text = "Sound effect volume"
+vertical_alignment = 2
+
+[node name="SFXVolumeSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_ryw3n")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="TextSizeLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("1_ryw3n")
+text = "Text Size"
+vertical_alignment = 2
+
+[node name="TextSizeSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_ryw3n")
+min_value = 12.0
+max_value = 46.0
+value = 20.0
+
+[node name="TextSpeedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("1_ryw3n")
+text = "Text Speed"
+vertical_alignment = 2
+
+[node name="TextSpeedSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_ryw3n")
+min_value = 4.0
+value = 20.0
+
+[node name="LineBox" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource("3_m2uc2")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Your changes will be saved"
+theme = ExtResource("1_ryw3n")
+theme_type_variation = &"DialogueChoiceButton"
+text = "Close"

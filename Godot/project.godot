@@ -28,6 +28,14 @@ config/icon="res://icon.svg"
 Rakugo="*res://addons/Rakugo/Rakugo.gd"
 MusicHandler="*res://music_and_sound/music_handler.tscn"
 SfxHandler="*res://music_and_sound/sfx_handler.tscn"
+Settings="*res://settings.gd"
+
+[display]
+
+window/size/viewport_width=3840
+window/size/viewport_height=2160
+window/size/mode=3
+window/size/borderless=true
 
 [editor]
 
@@ -43,7 +51,7 @@ enabled=PackedStringArray("res://addons/Rakugo/plugin.cfg", "res://addons/godot-
 
 texture={
 "compress/mode": 3,
-"detect_3d/compress_to": 0,
+"detect_3d/compress_to": 2,
 "mipmaps/generate": true
 }
 

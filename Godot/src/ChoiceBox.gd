@@ -4,7 +4,7 @@ extends VBoxContainer
 var choices : Array = []
 
 @onready var button : Button = $Choice
-@onready var next_prompt : Button = $NextPrompt
+@onready var next_prompt : Control = $NextPrompt
 
 func set_choices(new_choices):
     next_prompt.visible = false
