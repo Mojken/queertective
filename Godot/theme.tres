@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bqncvfcv4b46v"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://bqncvfcv4b46v"]
 
 [ext_resource type="Texture2D" uid="uid://d2girha0jxcu5" path="res://graphics/dialogue_ui_background.png" id="1_6s111"]
 
@@ -45,11 +45,27 @@ font_stretch = 75
 texture = ExtResource("1_6s111")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4sev"]
-bg_color = Color(0.415686, 0.862745, 0.952941, 1)
+bg_color = Color(0.0915, 0.523583, 0.61, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3g87i"]
+bg_color = Color(0.6318, 0.7553, 0.78, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.631373, 0.756863, 0.780392, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_poln8"]
 bg_color = Color(0, 0, 0, 0.321569)
@@ -82,7 +98,8 @@ DialogueLabel/fonts/normal_font = SubResource("SystemFont_0t716")
 DialoguePanel/base_type = &"Panel"
 DialoguePanel/styles/panel = SubResource("StyleBoxTexture_pbm5p")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_t4sev")
-HSlider/styles/slider = null
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_t4sev")
+HSlider/styles/slider = SubResource("StyleBoxFlat_3g87i")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10

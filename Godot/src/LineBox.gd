@@ -42,61 +42,80 @@ func _ready():
 
 func _physics_process(delta):
     if finished:
-        set_physics_process(false)
-        if next_prompt:
-            next_prompt.visible = true
-        sig_finished.emit()
+        timer -= min(delta, timer)
+        if timer < delta:
+            set_physics_process(false)
+            if next_prompt:
+                next_prompt.visible = true
+            sig_finished.emit()
         return
 
-    if timer > 0:
-        if Settings.settings.get(Settings.SETTING.text_speed) <= 40:
-            timer -= delta * Settings.settings.get(Settings.SETTING.text_speed)
-        else:
-            timer -= delta * Settings.settings.get(Settings.SETTING.text_speed) / 5
-    if sound_timer > 0:
-        sound_timer -= delta
+    var speed = Settings.settings.get(Settings.SETTING.text_speed)
+    if Settings.settings.get(Settings.SETTING.text_speed) > 40:
+        speed = Settings.settings.get(Settings.SETTING.text_speed) / 5
 
-    while timer <= 0:
-        if counter < len(line):
-            var char = line[counter]
-            label.text += char
-            counter += 1
-            var skip_sound = false
-            match char:
-                ".":
-                    timer += 6
-                "!":
-                    timer += 6
-                "?":
-                    timer += 6
-                ";":
-                    timer += 6
-                ",":
-                    timer += 3
-                "—":
-                    timer += 4
-                "\n":
-                    timer += 0
-                " ":
-                    timer += 1.5
-                    sound_timer = 0
-                    if Settings.settings.get(Settings.SETTING.text_speed) <= 40:
-                        skip_sound = true
-                "[":
-                    while char != "]":
-                        char = line[counter]
-                        label.text += char
-                        counter += 1
-                _:
-                    if Settings.settings.get(Settings.SETTING.text_speed) > 40:
-                        continue
-                    timer += 0.8
-            if timer > 0 and !skip_sound:
-                sound_timer -= 1
-                if sound_timer <= 0:
-                    SfxHandler.play_sound_effect([SfxHandler.SOUND_EFFECT.type1, SfxHandler.SOUND_EFFECT.type2, SfxHandler.SOUND_EFFECT.type3, SfxHandler.SOUND_EFFECT.type4, SfxHandler.SOUND_EFFECT.type5, SfxHandler.SOUND_EFFECT.type6][int(char) % 6])
-                    debug_sound_counter += 1
-                    sound_timer = 2
-        else:
-            finished = true
-            break
+    if timer > 0:
+        timer -= delta * speed
+    else:
+        var skip_sound = false
+        var char = ""
+        while timer <= 0:
+            if counter < len(line):
+                char = line[counter]
+                label.text += char
+                counter += 1
+                match char:
+                    ".":
+                        timer += 6
+                        sound_timer += 6
+                    "!":
+                        timer += 6
+                        sound_timer += 6
+                    "?":
+                        timer += 6
+                        sound_timer += 6
+                    ";":
+                        timer += 6
+                        sound_timer += 6
+                    ",":
+                        timer += 3
+                        sound_timer += 3
+                    "—":
+                        timer += 4
+                        sound_timer += 4
+                    "\n":
+                        timer += 0
+                        sound_timer += 0
+                    " ":
+                        timer += 1.5
+                        sound_timer += 1.5
+                        if Settings.settings.get(Settings.SETTING.text_speed) <= 40:
+                            skip_sound = true
+                    "[":
+                        while char != "]":
+                            char = line[counter]
+                            label.text += char
+                            counter += 1
+                    _:
+                        if Settings.settings.get(Settings.SETTING.text_speed) > 40:
+                            continue
+                        timer += 1
+                        sound_timer += 1
+            if counter >= len(line):
+                SfxHandler.play_sound_effect(SfxHandler.SOUND_EFFECT.typewriter_bell, 1.0, 1.68)
+                finished = true
+                timer = 2.43 - 1.68 - 0.1 # end of sound - start of sound - adjustment
+                return
+
+        print(sound_timer)
+        if !skip_sound and sound_timer >= 0.08 * speed:
+            SfxHandler.play_sound_effect([
+                SfxHandler.SOUND_EFFECT.type1,
+                SfxHandler.SOUND_EFFECT.type2,
+                SfxHandler.SOUND_EFFECT.type3,
+                SfxHandler.SOUND_EFFECT.type4,
+                SfxHandler.SOUND_EFFECT.type5,
+                SfxHandler.SOUND_EFFECT.type6
+            ][int(char) % 6])
+            debug_sound_counter += 1
+            sound_timer = 0

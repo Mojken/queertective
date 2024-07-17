@@ -56,7 +56,7 @@ func repeat_text():
     print(linebox.debug_sound_counter)
     linebox.debug_sound_counter = 0
     linebox.label.text = "[b]Example:[/b]\n"
-    linebox.line = "The quick brown fox jumps over the lazy dog "
+    linebox.line = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
     linebox.finished = false
     linebox.timer = 0
     linebox.counter = 0

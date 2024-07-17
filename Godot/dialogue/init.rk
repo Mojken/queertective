@@ -1,4 +1,4 @@
-character me "[color=#B883FF]Detective[/color]"
+character me "[color=#B883FF]Queertective[/color]"
 
 # Fake character to trigger clue handling. Consider replacing with custom regex thingy.
 character clues "Clue"

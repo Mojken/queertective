@@ -30,6 +30,7 @@ enum SOUND_EFFECT {
     type4,
     type5,
     type6,
+    typewriter_bell,
     curious,
     eureka,
 }
@@ -37,17 +38,18 @@ enum SOUND_EFFECT {
 var sound_effects = {
     SOUND_EFFECT.example_sound_effect_1: preload("res://music_and_sound/sound_effects/example_sound_effect_1.mp3"),
     SOUND_EFFECT.example_sound_effect_2: preload("res://music_and_sound/sound_effects/example_sound_effect_2.mp3"),
-    SOUND_EFFECT.type1: preload("res://music_and_sound/sound_effects/typewriter_sounds/type1.mp3"),
-    SOUND_EFFECT.type2: preload("res://music_and_sound/sound_effects/typewriter_sounds/type2.mp3"),
-    SOUND_EFFECT.type3: preload("res://music_and_sound/sound_effects/typewriter_sounds/type3.mp3"),
-    SOUND_EFFECT.type4: preload("res://music_and_sound/sound_effects/typewriter_sounds/type4.mp3"),
-    SOUND_EFFECT.type5: preload("res://music_and_sound/sound_effects/typewriter_sounds/type5.mp3"),
-    SOUND_EFFECT.type6: preload("res://music_and_sound/sound_effects/typewriter_sounds/type6.mp3"),
+    SOUND_EFFECT.type1: preload("res://music_and_sound/sound_effects/typewriter_sounds/type1.wav"),
+    SOUND_EFFECT.type2: preload("res://music_and_sound/sound_effects/typewriter_sounds/type2.wav"),
+    SOUND_EFFECT.type3: preload("res://music_and_sound/sound_effects/typewriter_sounds/type3.wav"),
+    SOUND_EFFECT.type4: preload("res://music_and_sound/sound_effects/typewriter_sounds/type4.wav"),
+    SOUND_EFFECT.type5: preload("res://music_and_sound/sound_effects/typewriter_sounds/type5.wav"),
+    SOUND_EFFECT.type6: preload("res://music_and_sound/sound_effects/typewriter_sounds/type6.wav"),
+    SOUND_EFFECT.typewriter_bell: preload("res://music_and_sound/sound_effects/typewriter_sounds/bell.wav"),
     SOUND_EFFECT.curious: preload("res://music_and_sound/sound_effects/Curious.mp3"),
     SOUND_EFFECT.eureka: preload("res://music_and_sound/sound_effects/Eureka.mp3"),
 }
 
-func play_sound_effect(sound_effect, pitch = 1.0):
+func play_sound_effect(sound_effect, pitch = 1.0, from = 0.0):
     var current_stream = audio_stream_players[current_audio_stream_player_index].stream
     var new_stream = sound_effects[sound_effect]
     var current_pitch = audio_stream_players[current_audio_stream_player_index].pitch_scale
@@ -55,7 +57,7 @@ func play_sound_effect(sound_effect, pitch = 1.0):
     if current_stream != new_stream or current_pitch != new_pitch:
         set_new_active_audio_stream_player(new_stream, new_pitch)
 
-    audio_stream_players[current_audio_stream_player_index].play()
+    audio_stream_players[current_audio_stream_player_index].play(from)
 
 
 func set_new_active_audio_stream_player(stream, pitch):

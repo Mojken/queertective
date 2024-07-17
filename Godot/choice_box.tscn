@@ -35,3 +35,5 @@ theme = ExtResource("3_2j8l1")
 theme_type_variation = &"DialogueChoiceButton"
 toggle_mode = true
 alignment = 0
+
+[connection signal="visibility_changed" from="NextPrompt" to="." method="_on_next_prompt_visibility_changed"]
