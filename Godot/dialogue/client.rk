@@ -143,7 +143,10 @@ concert_clue:
 
 next_clue:
     "This is as far as I've gotten with this investigation."
-    "Thank you for playing this, short as it is, and we hope you come back in the future, when there's hopefully more!"
+    "Thank you for playing this, short as it is! Hopefully in the future there will be more!"
+    "We had originally planned for multiple, interweaving cases, and a system for manually suggesting labels to the clients. But, life happened, as it does, and we ended up not having very much time to spend on the game."
+    "At the end of the day, we're happy with what we made, and we still feel inspired to continue this work."
+    "If that happens, we hope you check out a more complete version as well!"
 
     # Skip if player hasn't found clue
     jump clue_loop_end if clues.next_clue == 0

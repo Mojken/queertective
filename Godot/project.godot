@@ -28,7 +28,7 @@ config/icon="res://icon.svg"
 Rakugo="*res://addons/Rakugo/Rakugo.gd"
 MusicHandler="*res://music_and_sound/music_handler.tscn"
 SfxHandler="*res://music_and_sound/sfx_handler.tscn"
-Settings="*res://settings.gd"
+Settings="*res://src/settings.gd"
 
 [display]
 

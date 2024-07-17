@@ -32,7 +32,7 @@ awkward_concert:
 concert_init:
     "This is <clubguy.name>. They are well known as the owner of this club."
     me "Hello. I have some questions about the <client.fav_band> concert."
-    clubguy "I am! What do you want to know?"
+    clubguy "Then I'm your guy! What do you want to know?"
     me "Well, what can you tell me about it?"
     jump concert
 
@@ -57,7 +57,7 @@ concert:
     jump concert_wrapup if clues.concert_info == 1
 
     clues.concert_info = 1
-    me "I can get behind that"
+    me "I can get behind that."
     clubguy "I'd be a bit concerned if you couldn't."
     me "Right? Anyway, I think that's all I need to know. Thank you for your time."
     clubguy "No worries. Please come check out the concert!"

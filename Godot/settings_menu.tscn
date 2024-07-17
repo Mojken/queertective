@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqv5rnke210tn"]
 
 [ext_resource type="Theme" uid="uid://bqncvfcv4b46v" path="res://theme.tres" id="1_ryw3n"]
-[ext_resource type="Script" path="res://settings_menu.gd" id="2_0hmcd"]
+[ext_resource type="Script" path="res://src/settings_menu.gd" id="2_0hmcd"]
 [ext_resource type="PackedScene" uid="uid://cn7gg65xvd80e" path="res://linebox.tscn" id="3_m2uc2"]
 
 [node name="SettingsMenu" type="MarginContainer" node_paths=PackedStringArray("linebox", "volume_slider", "SFXvolume_slider", "size_slider", "speed_slider", "close_button")]
