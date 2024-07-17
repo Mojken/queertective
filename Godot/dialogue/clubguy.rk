@@ -4,7 +4,7 @@ jump concert_init if clues.ghost_concert == 1
 jump hellobye
 
 hellobye:
-    "This is <clubguy.name>. They're well known as the owner of this club."
+    "I struck up a conversation with <clubguy.name>. They're well known as the manager of the club."
     me "Hello."
     clubguy "Hi."
     me "..."
@@ -30,7 +30,7 @@ awkward_concert:
     jump concert
 
 concert_init:
-    "This is <clubguy.name>. They are well known as the owner of this club."
+    "I struck up a conversation with <clubguy.name>. They're well known as the manager of the club."
     me "Hello. I have some questions about the <client.fav_band> concert."
     clubguy "Then I'm your guy! What do you want to know?"
     me "Well, what can you tell me about it?"
@@ -42,7 +42,7 @@ concert_again:
     jump concert
 
 concert:
-    clubguy "<client.fav_band> say they are "pivoting into their Ghost Punk era". From what I can tell, it's mostly a slight aestetic shift into some grungier looks, but this "Ghost Awareness Concert" as they call it might actually end up doing some good, so who knows?"
+    clubguy "<client.fav_band> say they are "pivoting into their Ghost Punk era". From what I can tell, it's mostly a slight aesthetic shift into some grungier looks, but this "Ghost Awareness Concert" as they call it might actually end up doing some good, so who knows?"
     clubguy "Maybe if they keep that kind of thing up, they could go down in history."
     clubguy "Probably not though."
     clubguy "Don't get me wrong, I'm happy to be hosting them. If nothing else, they have a very dedicated fanbase. Good for business, and I enjoy using my club for something good every now and then."

@@ -13,4 +13,4 @@ introduction:
     me "I'm getting really worked up here, I think I'm onto something! Now I just need to wait for a client, and... No, that won't work. Nobody knows that I do this yet. I need to go out there, and find a client myself!"
     "Objective: Find a client"
     menu end:
-         "Continue"
+         "Start"

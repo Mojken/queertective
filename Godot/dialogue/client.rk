@@ -1,23 +1,23 @@
 jump first_chat if client.talked == 0
 jump ask_about_clues if client.talked == 1
 
-
 first_chat:
+    "I approached a potential client."
     client.talked = 1
     me "Hey, how are you doing, friend?"
     client "Oh, Hi. I'm not doing so bad."
     me "Let me guess, there's nothing you need help with, right? No mysteries to solve or so?"
     client "... No?"
     me "That checks out. I'm a detective, you see, but that's not really been going too well. No clients. Name's Queertective."
-    "We shook hands"
+    "We shook hands."
+    client "<client.fullname>."
     client.name = "[color=#6ADCF3]Giselle[/color]"
-    client "<client.fullname>"
     me "Pleasure. Say — and I apologise if I'm overstepping boundaries here — did you know that whatever your sexuality and identity is, you're not alone in feeling that way?"
     client "That's cute, but you're being naive."
     me "Not at all! In fact, let me prove it to you! I'll use my detective skills to find you your community!"
     client "I don't know..."
     me "All you'd need to do it tell me a little bit about yourself, and I'll handle the rest. You shouldn't underestimate a detective, you know!"
-    "She shrugged"
+    "She shrugged."
     client "Eh, why not. So what do you want to know?"
 
     menu interrogation:
@@ -45,8 +45,8 @@ partners:
     me "I get that. Sorry you had to get used to something like that, though. Hopefully that's something I can help with."
     client "Thanks, but I doubt it."
     me "You're still underestimating detectives! You'll see."
-    "Objective complete: Find a client"
-    "New objective: Figure out <client.name>'s sexuality"
+    "Objective complete: Find a client."
+    "New objective: Figure out <client.name>'s sexuality."
 
     jump interrogation
 
@@ -71,6 +71,7 @@ gender:
     jump interrogation
 
 ask_about_clues:
+    "I return to <client.name> to discuss the case."
     me "Hello. I'm back again, wanted to ask you some questions. Is now a good time?"
     client "Sure, ask away."
     menu ask_clues:
@@ -116,12 +117,12 @@ concert_clue:
     me "How so?"
     client "..."
     client "Well, you seem open-minded about this, so I suppose it's fine. I don't want to you telling others about this though, can you promise me that? I don't mind personally so much, but it's important to my partner."
-    me "I promise. A good detective excells at both finding and keeping secrets, and I'm the best detective you'll likely ever meet."
+    me "I promise. A good detective excels at both finding and keeping secrets, and I'm the best detective you'll likely ever meet."
     client "Okay, well, you see... I date ghosts."
     me "Oh"
-    "Objective complete: Figure out <client.name>'s sexuality"
+    "Objective complete: Figure out <client.name>'s sexuality."
     client "Always have. Somehow, people have just never interested me."
-    client "I thought I was somehow secretly a ghost myself, growing up. Possesed maybe?"
+    client "I thought I was somehow secretly a ghost myself, growing up. Possessed maybe?"
     client "Now I just assume I'm broken in some way."
     client "But you know what? My partner is great, I wouldn't want anybody else, and if I were normal we would have never met."
     client "Dating the living is taboo among ghosts, so we have to keep it hidden. Heck, I'm not really so sure the living would take kindly to it either."
@@ -137,7 +138,7 @@ concert_clue:
     "I put a hand on her shoulder. Our eyes met."
     me "I intend to keep my promise. I'll find you your community. Thank you for sharing this with me, it's an honour."
     "I pulled away before it got weird."
-    "New objective: Find <client.name> a community"
+    "New objective: Find <client.name> a community."
 
     jump next_clue
 
@@ -160,7 +161,6 @@ next_clue:
     client.talked_about_clues = 1
 
     "There isn't actually a clue here yet. I don't know how you managed to get here, but please let the devs know about it!"
-    "Give them this: <clues.next_clue><client.talked_about_next_clue><client.old_or_new_clues><client.skip_next_clue><clues.knows_band_name><clues.ghost_concert><clues.concert_info>"
 
     jump clue_loop_end
 
