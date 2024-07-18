@@ -3,8 +3,10 @@ extends CharacterBody3D
 @export var speed : float = 2.0
 
 @export var interact_prompt : Button
-var interact_target = null
+var interact_target : Chatable = null
 
+@onready var camera : Camera3D = $Camera
+var camera_offset = 0.0
 @onready var animated_sprite : AnimatedSprite3D = $Sprite3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -29,12 +31,17 @@ func _ready():
 
 func _process(_delta):
     if interact_target != null and Input.is_action_just_pressed("interact"):
-        if interact_target is Chatable:
+        if interact_target is Chatable and !interact_target.talking:
             get_viewport().set_input_as_handled()
-            interact_target.chat()
             interact_prompt.visible = false
+            if interact_target.chat():
+                if interact_target.marker.x < interact_target.position.x:
+                    camera_offset = 0.5
+                else:
+                    camera_offset = 0.2
 
 func _physics_process(delta):
+    camera.h_offset = lerp(camera.h_offset, camera_offset, delta * 3)
     self.set_collision_mask_value(2, true)
     if interact_target != null and interact_target.talking:
         var direction3 : Vector3 = self.position - (interact_target.position + interact_target.marker)
@@ -42,31 +49,36 @@ func _physics_process(delta):
         self.set_collision_mask_value(2, false)
         if direction2.length_squared() < 0.01:
             direction = Vector2.ZERO
-            animated_sprite.flip_h = false
+            if self.position.x < interact_target.position.x:
+                animated_sprite.flip_h = false
+            else:
+                animated_sprite.flip_h = true
         else:
             direction = Vector2(direction3.x, direction3.z).normalized() * -1
     elif Rakugo.is_waiting_step():
         # Player is talking to themselves. Let's stand still for a bit.
         return
-    elif layer_target != null:
-        if layer_start == null:
-            layer_start = position.z
-        layer_acc += delta * 3
-        var smaller = min(abs(layer_start), abs(layer_target))
-        var step = smoothstep(
-            smaller,
-            max(abs(layer_start), abs(layer_target)),
-            smaller + layer_acc
-        )
-        position.z = lerp(layer_start, layer_target, step)
+    #elif layer_target != null:
+    #    camera_offset = 0.0
+    #    if layer_start == null:
+    #        layer_start = position.z
+    #    layer_acc += delta * 3
+    #    var smaller = min(abs(layer_start), abs(layer_target))
+    #    var step = smoothstep(
+    #        smaller,
+    #        max(abs(layer_start), abs(layer_target)),
+    #        smaller + layer_acc
+    #    )
+    #    position.z = lerp(layer_start, layer_target, step)
 
-        direction = Vector2.ZERO
-        velocity = Vector3.ZERO
-        if step >= 1.0:
-            layer_target = null
-            layer_start = null
-            layer_acc = 0
+    #    direction = Vector2.ZERO
+    #    velocity = Vector3.ZERO
+    #    if step >= 1.0:
+    #        layer_target = null
+    #        layer_start = null
+    #        layer_acc = 0
     else:
+        camera_offset = 0.0
         direction = Input.get_vector("left", "right", "up", "down")
 
     if direction.length_squared() > 0:
@@ -83,6 +95,12 @@ func _physics_process(delta):
 
     move_and_slide()
 
+
+    #move_down_corridor()
+    update_animation()
+    update_facing_direction()
+
+func move_down_corridor():
     var corridor_width = 1.2
     var corridor_spacing = 5
     var mod_pos = fmod(position.z, corridor_spacing)
@@ -93,8 +111,6 @@ func _physics_process(delta):
             layer_target = position.z + corridor_spacing - mod_pos + 0.1
         elif velocity.z < 0:
             layer_target = position.z - mod_pos + corridor_width - 0.1
-    update_animation()
-    update_facing_direction()
 
 func update_animation():
     if not animation_locked:
@@ -108,10 +124,6 @@ func update_facing_direction():
         animated_sprite.flip_h = false
     elif direction.x < 0:
         animated_sprite.flip_h = true
-
-func _on_animated_sprite_2d_animation_finished():
-    if(["jump_end", "jump_start", "jump_double"].has(animated_sprite.animation)):
-        animation_locked = false
 
 
 func _on_area_3d_body_entered(body):

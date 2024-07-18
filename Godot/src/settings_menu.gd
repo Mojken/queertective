@@ -38,9 +38,9 @@ func speed_changed(new_value):
 func size_changed(new_value):
     Settings.settings[Settings.SETTING.font_size] = new_value
     self.theme.default_font_size = new_value
-    self.theme.set_font_size("bold_font_size", "DialogueLabel", new_value * 1.1)
+    self.theme.set_font_size("bold_font_size", "DialogueLabel", new_value * 1.2)
     self.theme.set_font_size("normal_font_size", "DialogueLabel", new_value)
-    self.theme.set_font_size("italics_font_size", "DialogueLabel", new_value)
+    self.theme.set_font_size("italics_font_size", "DialogueLabel", new_value * 0.9)
 
 func close():
     visible = false

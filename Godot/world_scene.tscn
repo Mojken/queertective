@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://duevkcs6lgjb8"]
+[gd_scene load_steps=28 format=3 uid="uid://duevkcs6lgjb8"]
 
 [ext_resource type="Texture2D" uid="uid://cydkf7j58kaln" path="res://graphics/background_sky.png" id="1_c6ey5"]
 [ext_resource type="PackedScene" uid="uid://b57gjlgrdq3ys" path="res://player.tscn" id="1_i4pft"]
@@ -9,9 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://dkkmafa8ll68h" path="res://graphics/npc3.png" id="6_i6ufx"]
 [ext_resource type="Texture2D" uid="uid://b51rb4b2n7xmn" path="res://graphics/posters.png" id="7_p0hix"]
 [ext_resource type="Texture2D" uid="uid://b48odallywlbp" path="res://graphics/building1_texture.jpg" id="9_1xhpe"]
+[ext_resource type="PackedScene" uid="uid://dha4abpshvxv4" path="res://graphics/building2_3.gltf" id="9_3agax"]
 [ext_resource type="ArrayMesh" uid="uid://dh8tn6fuhr4a" path="res://graphics/building1.obj" id="9_4n6hl"]
-[ext_resource type="Texture2D" uid="uid://1wp8fipjout1" path="res://graphics/building2withstaircase_texture.jpg" id="10_j8aqv"]
-[ext_resource type="ArrayMesh" uid="uid://c0se2t6g6bl1e" path="res://graphics/building2.obj" id="11_0d8v6"]
+[ext_resource type="Texture2D" uid="uid://jwhsq6g2lopn" path="res://graphics/npc2.png" id="9_l3kt4"]
+[ext_resource type="PackedScene" uid="uid://di2wio33223aw" path="res://graphics/building3.gltf" id="12_xp1lo"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jqtjw"]
 panorama = ExtResource("1_c6ey5")
@@ -34,7 +35,7 @@ adjustment_saturation = 1.1
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_np8lb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yl6d5"]
-size = Vector3(17.5, 1.687, 3.8)
+size = Vector3(17.5, 3, 3.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j8bya"]
 size = Vector3(2.5, 1.687, 20)
@@ -44,6 +45,9 @@ size = Vector3(3.70947, 2.40551, 0.291675)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkqq0"]
 albedo_texture = ExtResource("9_1xhpe")
+texture_filter = 2
+proximity_fade_distance = 0.1
+distance_fade_max_distance = 1.0
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_25gig"]
 
@@ -55,10 +59,12 @@ size = Vector2(100, 100)
 radius = 0.1
 height = 0.809533
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wytp"]
-albedo_texture = ExtResource("10_j8aqv")
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ag415"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0u77j"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_7yt1u"]
+size = Vector3(0.15, 0.01, 0.03)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ivrlj"]
 size = Vector3(0.666992, 0.95105, 0.0109619)
 
 [node name="Node2D" type="Node3D"]
@@ -71,41 +77,42 @@ camera_attributes = SubResource("CameraAttributesPractical_np8lb")
 transform = Transform3D(0.965926, -0.25, 0.0669873, 0, 0.258819, 0.965926, -0.258819, -0.933013, 0.25, 3.3387, 4.59197, 1.55261)
 
 [node name="Player" parent="." instance=ExtResource("1_i4pft")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000233501, 0.701067)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28905, -0.000233501, 0.701067)
 collision_mask = 3
 
 [node name="Level" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3869e-05, 0.00783134, -0.000442982)
 
 [node name="FrontBound" type="StaticBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53989, 0, 5.32365)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/FrontBound"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 1.5, -1.62498)
 shape = SubResource("BoxShape3D_yl6d5")
 
 [node name="BackBound" type="StaticBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53989, 0, -0.208031)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/BackBound"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
 shape = SubResource("BoxShape3D_yl6d5")
 
 [node name="RightBound" type="StaticBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5399, 0, -5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/RightBound"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
 shape = SubResource("BoxShape3D_j8bya")
 
 [node name="LeftBound" type="StaticBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.46011, 0, -5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/LeftBound"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249, 0.843, -1.9)
 shape = SubResource("BoxShape3D_j8bya")
 
 [node name="Building3" type="StaticBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03304, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00305, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Building3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8528, 1.20656, -0.05131)
@@ -115,7 +122,6 @@ shape = SubResource("BoxShape3D_vvnnq")
 transform = Transform3D(0.999993, 0.0023002, -0.0030142, -0.00230204, 0.999997, -0.000602388, 0.0030128, 0.00060934, 0.999995, 0.860133, 0.140831, -0.0516162)
 material_override = SubResource("StandardMaterial3D_bkqq0")
 mesh = ExtResource("9_4n6hl")
-skeleton = NodePath("../../..")
 
 [node name="Floor" type="StaticBody3D" parent="Level"]
 
@@ -126,8 +132,68 @@ shape = SubResource("WorldBoundaryShape3D_25gig")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Floor"]
 mesh = SubResource("PlaneMesh_grj13")
 
+[node name="ClubGuy" type="CharacterBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42351, 0.457767, 0.414227)
+collision_layer = 2
+script = ExtResource("2_42c1c")
+character_name = "clubguy"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/ClubGuy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -0.0529062, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Level/ClubGuy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999999, -0.053, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="Sprite3D" type="Sprite3D" parent="Level/ClubGuy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0111377, 0)
+sorting_offset = 0.1
+flip_h = true
+pixel_size = 0.004
+texture_filter = 2
+texture = ExtResource("6_i6ufx")
+
+[node name="Marker" type="Node3D" parent="Level/ClubGuy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424397, -0.476155, -0.177514)
+
+[node name="Blob" type="CharacterBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67542, 0.457767, 0.414227)
+collision_layer = 2
+script = ExtResource("2_42c1c")
+character_name = "blob"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Blob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -0.0529062, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Level/Blob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999999, -0.053, 0)
+shape = SubResource("CapsuleShape3D_0kij2")
+
+[node name="Sprite3D" type="Sprite3D" parent="Level/Blob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0111377, 0)
+sorting_offset = 0.1
+pixel_size = 0.004
+texture_filter = 2
+texture = ExtResource("9_l3kt4")
+
+[node name="Marker" type="Node3D" parent="Level/Blob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.464036, -0.476155, 0.14658)
+
+[node name="building2_3" parent="Level" instance=ExtResource("9_3agax")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35454, -0.0751456, -0.260574)
+
+[node name="StairRamp" type="StaticBody3D" parent="Level/building2_3"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -0.00983012, -0.00055594, -0.0175767)
+physics_material_override = SubResource("PhysicsMaterial_ag415")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/building2_3/StairRamp"]
+transform = Transform3D(0.736415, -0.676528, 0, 0.676528, 0.736415, 0, 0, 0, 0.999999, 0.040614, 0.051711, 0.102688)
+shape = SubResource("BoxShape3D_7yt1u")
+
 [node name="Client" type="CharacterBody3D" parent="Level"]
-transform = Transform3D(1, -0.000792623, -0.000164072, 0.000792617, 1, -3.41798e-05, 0.000164092, 3.40539e-05, 1, -2.78757, 0.498343, 0.225784)
+transform = Transform3D(1, -0.000792623, -0.000164072, 0.000792617, 1, -3.41798e-05, 0.000164092, 3.40539e-05, 1, -3.15299, 1.97468, 0.225784)
 collision_layer = 2
 script = ExtResource("2_42c1c")
 character_name = "client"
@@ -141,45 +207,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.053, 0)
 shape = SubResource("CapsuleShape3D_0kij2")
 
 [node name="Sprite3D" type="Sprite3D" parent="Level/Client"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0247517, -0.0238263, 0)
+transform = Transform3D(1, 2.76223e-13, 0, -6.47038e-13, 1, 0, 0, 7.27596e-12, 1, -0.024734, -0.00203222, -7.45058e-07)
 sorting_offset = 0.1
 pixel_size = 0.004
 texture_filter = 2
 texture = ExtResource("3_2wroo")
 
 [node name="Marker" type="Node3D" parent="Level/Client"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.464036, -0.476155, 0.14658)
+transform = Transform3D(1, 2.78e-13, 2.91038e-11, -6.46594e-13, 1, 7.27596e-12, 0, 1.81899e-11, 1, -0.454129, -0.455988, 0.146578)
 
-[node name="ClubGuy" type="CharacterBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.73388, 0.457767, -4.89663)
+[node name="Poster" type="CharacterBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.641824, -7.45058e-09, 0.0921342)
 collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_42c1c")
-character_name = "clubguy"
+character_name = "poster"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/ClubGuy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999999, -0.0529062, 0)
-shape = SubResource("CapsuleShape3D_0kij2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Poster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89564, 0)
+shape = SubResource("BoxShape3D_ivrlj")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Level/ClubGuy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.053, 0)
-shape = SubResource("CapsuleShape3D_0kij2")
+[node name="Marker" type="Node3D" parent="Level/Poster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.309306)
 
-[node name="Sprite3D" type="Sprite3D" parent="Level/ClubGuy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0111377, 0)
-sorting_offset = 0.1
+[node name="Sprite3D" type="Sprite3D" parent="Level/Poster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749517, 0)
 pixel_size = 0.004
-texture_filter = 2
-texture = ExtResource("6_i6ufx")
+texture = ExtResource("7_p0hix")
 
-[node name="Marker" type="Node3D" parent="Level/ClubGuy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.464036, -0.476155, 0.14658)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44395, 0.63532)
-light_size = 0.192
-shadow_enabled = true
-omni_range = 2.92224
-omni_attenuation = 0.361374
+[node name="building32" parent="Level" instance=ExtResource("12_xp1lo")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 8.0481, -0.00783134, 0.247147)
 
 [node name="TextEdit" type="TextEdit" parent="."]
 visible = false
@@ -207,27 +264,3 @@ size_flags_stretch_ratio = 2.0
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("4_qumot")]
 layout_mode = 2
-
-[node name="Building2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35015, -0.165024, -10.8189)
-material_override = SubResource("StandardMaterial3D_3wytp")
-mesh = ExtResource("11_0d8v6")
-
-[node name="Poster" type="CharacterBody3D" parent="Building2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20111, -0.255091, 7.16911)
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("2_42c1c")
-character_name = "poster"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Building2/Poster"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11175, 0.89564, -0.00557619)
-shape = SubResource("BoxShape3D_0u77j")
-
-[node name="Marker" type="Node3D" parent="Building2/Poster"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0835, 0.305188, 0.347745)
-
-[node name="Sprite3D" type="Sprite3D" parent="Building2/Poster"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0179, 0.749517, 0.086038)
-pixel_size = 0.004
-texture = ExtResource("7_p0hix")

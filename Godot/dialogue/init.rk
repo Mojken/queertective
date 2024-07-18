@@ -18,3 +18,6 @@ client.talked_about_next_clue = 0
 character clubguy "[color=#25DD7A]Ziggy Shade[/color]"
 clubguy.talked_about_band = 0
 clubguy.awkward = 0
+
+character blob "[color=orange]Pal?[/color]"
+blob.talked = 0

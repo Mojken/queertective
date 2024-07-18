@@ -1,0 +1,53 @@
+jump first_talk if blob.talked == 0
+jump more_talk if blob.talked == 1
+
+first_talk:
+    blob.talked = 1
+    "I approached a potential client."
+    me "Hi pal. I'm a detective, is there anything I can help you with?"
+    blob "No, I'm perfectly content."
+    me "That's nice. Kinda wish you weren't though."
+    blob "Rude, but I understand what you're saying. Doesn't make me any less content, sorry."
+
+    jump concert if clues.concert_info
+    jump midnightblood if clues.ghost_concert
+    jump poster if clues.knows_band_name
+
+    me "That's alright. See you."
+    blob "Yeah."
+    jump end
+
+more_talk:
+    "I once again approached the contented fellow out on the street."
+    me "Hi again."
+    blob "Yo."
+    jump concert if clues.concert_info
+    jump midnightblood if clues.ghost_concert
+    jump poster if clues.knows_band_name
+
+concert:
+    me "Say, have you heard what <client.fav_band> are doing with their concert?"
+    blob "Yeah. I saw the poster, asked around a little bit. It does seem interesting. I might even go."
+    me "Then maybe I'll see you there!"
+    blob "Cool."
+    jump end
+
+midnightblood:
+    me "Say, you wouldn't happen to know anything about <client.fav_band>'s Ghost Awareness concert, would you?"
+    blob "You mean the one on the poster over there?"
+    me "Yup."
+    blob "Not really. Maybe ask <clubguy.name>? They're hosting it, after all."
+    me "That's a great idea! Cheers!"
+    blob "Sure thing."
+    jump end
+
+poster:
+    me "Say, you wouldn't happen to know anything about <client.fav_band>, would you?"
+    blob "I know them, but one of their posters is hanging on the wall right behind you as well."
+    me "Oh! I'll go check that out! Cheers!"
+    blob "Sure thing."
+    jump end
+
+end:
+    menu end:
+         "Leave"

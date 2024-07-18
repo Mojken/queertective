@@ -119,8 +119,9 @@ concert_clue:
     client "Well, you seem open-minded about this, so I suppose it's fine. I don't want to you telling others about this though, can you promise me that? I don't mind personally so much, but it's important to my partner."
     me "I promise. A good detective excels at both finding and keeping secrets, and I'm the best detective you'll likely ever meet."
     client "Okay, well, you see... I date ghosts."
-    me "Oh"
+    clues.next_clue = 1
     "Objective complete: Figure out <client.name>'s sexuality."
+    me "Oh"
     client "Always have. Somehow, people have just never interested me."
     client "I thought I was somehow secretly a ghost myself, growing up. Possessed maybe?"
     client "Now I just assume I'm broken in some way."
@@ -143,12 +144,6 @@ concert_clue:
     jump next_clue
 
 next_clue:
-    "This is as far as I've gotten with this investigation."
-    "Thank you for playing this, short as it is! Hopefully in the future there will be more!"
-    "We had originally planned for multiple, interweaving cases, and a system for manually suggesting labels to the clients. But, life happened, as it does, and we ended up not having very much time to spend on the game."
-    "At the end of the day, we're happy with what we made, and we still feel inspired to continue this work."
-    "If that happens, we hope you check out a more complete version as well!"
-
     # Skip if player hasn't found clue
     jump clue_loop_end if clues.next_clue == 0
 
@@ -160,7 +155,11 @@ next_clue:
     client.talked_about_next_clue = 1
     client.talked_about_clues = 1
 
-    "There isn't actually a clue here yet. I don't know how you managed to get here, but please let the devs know about it!"
+    "This is as far as I've gotten with this investigation."
+    "Thank you for playing this, short as it is! Hopefully in the future there will be more!"
+    "We had originally planned for multiple, interweaving cases, and a system for manually suggesting labels to the clients. But, life happened, as it does, and we ended up not having very much time to spend on the game."
+    "At the end of the day, we're happy with what we made, and we still feel inspired to continue this work."
+    "If that happens, we hope you check out a more complete version as well!"
 
     jump clue_loop_end
 

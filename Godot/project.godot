@@ -19,6 +19,7 @@ rakugo/save_folder="user://saves"
 [application]
 
 config/name="Queertective"
+config/version="1.0"
 run/main_scene="res://introduction.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
@@ -32,10 +33,11 @@ Settings="*res://src/settings.gd"
 
 [display]
 
-window/size/viewport_width=3840
-window/size/viewport_height=2160
+window/size/viewport_width=640
+window/size/viewport_height=360
 window/size/mode=3
 window/size/borderless=true
+window/stretch/scale_mode="integer"
 
 [editor]
 
@@ -133,3 +135,4 @@ menu={
 textures/canvas_textures/default_texture_filter=0
 textures/webp_compression/compression_method=0
 textures/default_filters/use_nearest_mipmap_filter=true
+textures/decals/filter=0

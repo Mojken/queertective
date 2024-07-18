@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dxy4nwptkt1jd"]
+
+[ext_resource type="Texture2D" uid="uid://bkdrw418osikp" path="res://graphics/building3_texture.png" id="1_smtm5"]
+
+[resource]
+diffuse_mode = 1
+albedo_texture = ExtResource("1_smtm5")
+anisotropy = 0.47
+texture_filter = 2
+texture_repeat = false
+point_size = 128.0
+distance_fade_max_distance = 2.0

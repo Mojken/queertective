@@ -70,7 +70,7 @@ func _on_execute_script_finished(_script_name:String, _error_str:String):
 
 func _on_charvar_changed(character_tag:String, var_name:String, value:Variant):
     if character_tag == "clues":
-        spawn_line_box(null, "───── Clue found! ─────")
+        spawn_line_box(null, "----- Clue found! -----").skip()
         SfxHandler.play_sound_effect(SfxHandler.SOUND_EFFECT.eureka)
     else:
         match var_name:
@@ -96,7 +96,7 @@ func _process(delta):
 
 func _gui_input(event):
     if event.is_action("interact"):
-        if event.pressed:
+        if event.pressed and !event.is_echo():
             skip_timer = 0
         elif skip_timer > 0 and skip_timer < 0.5:
             next()
