@@ -67,14 +67,14 @@ func _ready():
     var inputs = InputMap.action_get_events(action)
     self.text = \"\"
     for button in inputs:
-        button = button as InputEventKey
-        var keycode = DisplayServer.keyboard_get_keycode_from_physical(button.physical_keycode)
-        var alts = [button.as_text_keycode(), button.as_text_key_label(), OS.get_keycode_string(keycode)]
-        for alt in alts:
-            if alt in replace:
-                self.text += replace[alt]
-            else:
-                self.text += alt.substr(0,3).to_upper()
+        if button is InputEventKey:
+            var keycode = DisplayServer.keyboard_get_keycode_from_physical(button.physical_keycode)
+            var alts = [button.as_text_keycode(), button.as_text_key_label(), OS.get_keycode_string(keycode)]
+            for alt in alts:
+                if alt in replace:
+                    self.text += replace[alt]
+                else:
+                    self.text += alt.substr(0,3).to_upper()
 
 func _process(_delta):
     if Input.is_action_pressed(action):

@@ -2,7 +2,7 @@
 jump introduction
 
 introduction:
-    "Welcome to Queertective. Click to start."
+    "Welcome to Queertective. Click anywhere on this panel to start."
     me "I'm in a pickle. I thought this detective business was gonna be smooth sailing, but I haven't even gotten a single client yet!"
     "You can click the dialogue panel or press the interact button to rush the text, or hold to skip forward until the current line is done."
     me "Maybe I should have listened when people said this would happen, what with the zero crime rate and all. But being a detective is my dream! I mean, look at this getup!"
